@@ -1,0 +1,5 @@
+// Currently under development. The summary is a description of what the app will be when it's done //
+
+Life Coach is a React app dedicated to helping people manage their time in the most effective way possible to achieve their ultimate goals. Emphasizing a multi tiered approach to time management in the form of Daily Goals, Weekly Goals, Long Term Goals, and Big Picture Goals, Life Coach provides the platform and guidance required to break down even the most difficult objectives into manageable and realistic fragments and action plans.
+
+What really separates Life Coach from other time management, goal tracker, and scheduling applications though is its "see the forest through the trees" approach. Life Coach forces the user to define their big picture goals first and then work backwards from that. Every time a goal is broken down into smaller fragments it is done so with the intention of building towards that one particular big picture goal. In addition, supplemental material on what it takes to achieve lofty goals and effective time management is provided in snippets throughout the application and in the pre-made frameworks that come with the app.
