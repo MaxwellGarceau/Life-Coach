@@ -1,9 +1,10 @@
 .calendar {
   &__row {
-    // border: 1px solid transparent;
     min-height: 75px;
-      &:nth-child(odd) {
-      background-color: $light-grey;
-    }
   }
+    &__row--bg-color {
+        &:nth-child(odd) {
+        background-color: $light-grey;
+      }
+    }
 }

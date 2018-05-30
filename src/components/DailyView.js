@@ -1,5 +1,5 @@
 import React from 'react';
-import { DailyViewRow } from './DailyViewRow';
+import DailyViewRow from './DailyViewRow';
 
 export class DailyView extends React.Component {
   render () {
