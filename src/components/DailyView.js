@@ -5,30 +5,30 @@ export class DailyView extends React.Component {
   render () {
     return (
       <div className="calendar">
-        <DailyViewRow time={'12am'} />
-        <DailyViewRow time={'1am'} />
-        <DailyViewRow time={'2am'} />
-        <DailyViewRow time={'3am'} />
-        <DailyViewRow time={'4am'} />
-        <DailyViewRow time={'5am'} />
-        <DailyViewRow time={'6am'} />
-        <DailyViewRow time={'7am'} />
-        <DailyViewRow time={'8am'} />
-        <DailyViewRow time={'9am'} />
-        <DailyViewRow time={'10am'} />
-        <DailyViewRow time={'11am'} />
-        <DailyViewRow time={'12pm'} />
-        <DailyViewRow time={'1pm'} />
-        <DailyViewRow time={'2pm'} />
-        <DailyViewRow time={'3pm'} />
-        <DailyViewRow time={'4pm'} />
-        <DailyViewRow time={'5pm'} />
-        <DailyViewRow time={'6pm'} />
-        <DailyViewRow time={'7pm'} />
-        <DailyViewRow time={'8pm'} />
-        <DailyViewRow time={'9pm'} />
-        <DailyViewRow time={'10pm'} />
-        <DailyViewRow time={'11pm'} />
+        <DailyViewRow startTime={'12am'} />
+        <DailyViewRow startTime={'1am'} />
+        <DailyViewRow startTime={'2am'} />
+        <DailyViewRow startTime={'3am'} />
+        <DailyViewRow startTime={'4am'} />
+        <DailyViewRow startTime={'5am'} />
+        <DailyViewRow startTime={'6am'} />
+        <DailyViewRow startTime={'7am'} />
+        <DailyViewRow startTime={'8am'} />
+        <DailyViewRow startTime={'9am'} />
+        <DailyViewRow startTime={'10am'} />
+        <DailyViewRow startTime={'11am'} />
+        <DailyViewRow startTime={'12pm'} />
+        <DailyViewRow startTime={'1pm'} />
+        <DailyViewRow startTime={'2pm'} />
+        <DailyViewRow startTime={'3pm'} />
+        <DailyViewRow startTime={'4pm'} />
+        <DailyViewRow startTime={'5pm'} />
+        <DailyViewRow startTime={'6pm'} />
+        <DailyViewRow startTime={'7pm'} />
+        <DailyViewRow startTime={'8pm'} />
+        <DailyViewRow startTime={'9pm'} />
+        <DailyViewRow startTime={'10pm'} />
+        <DailyViewRow startTime={'11pm'} />
       </div>
     );
   }

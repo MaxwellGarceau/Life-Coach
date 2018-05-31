@@ -29,17 +29,18 @@ export class DailyViewModal extends React.Component {
     return (
       <div className="daily-view-modal">
         <form onSubmit={this.onSubmit}>
-          <h6>Planner Modal</h6>
+          <h6 className="daily-view-modal__title">Planner Modal</h6>
           <textarea
+            className="daily-view-modal__body"
             onChange={this.onNoteDescriptionChange}
             value={this.state.noteDescription}
             placeholder='Activity Description'
           />
-          <DailyViewTimeSelector />
+          <DailyViewTimeSelector startTime={this.props.startTime}/>
           <div>
-            <button className="button" type="submit">Save</button>
-            <button className="button" type="button" onClick={this.onClearNoteDescription}>Clear Contents</button>
-            <button className="button" type="button" onClick={this.onToggleModal}>Cancel</button>
+            <button className="button daily-view-modal__button" type="submit">Save</button>
+            <button className="button daily-view-modal__button" type="button" onClick={this.onClearNoteDescription}>Clear Contents</button>
+            <button className="button daily-view-modal__button" type="button" onClick={this.onToggleModal}>Cancel</button>
           </div>
         </form>
       </div>

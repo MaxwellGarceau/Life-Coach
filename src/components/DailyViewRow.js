@@ -21,14 +21,14 @@ export class DailyViewRow extends React.Component {
   render (props) {
     let modalBgVisiblityClasses = this.state.isModalVisible ? ' visible opacity-full' : '';
     return (
-      <section className="calendar__row--bg-color">
+      <section className={`calendar__row--bg-color${this.props.activityBgColor}`}>
     {/* Individual Calendar Row */}
-        <div id={this.props.time} className="calendar__row" onClick={this.onToggleModal}>
-          <div>{this.props.time}</div>
+        <div id={this.props.startTime} className="calendar__row" onClick={this.onToggleModal}>
+          <div>{this.props.startTime}</div>
           <div className="daily-view__description">{this.state.noteDescription}</div>
         </div>
       {/* Modal pop up for inputting activity */}
-        <div className={`daily-view-modal__background${modalBgVisiblityClasses}`}>{this.state.isModalVisible && <DailyViewModal setNoteDescription={this.setNoteDescription} onToggleModal={this.onToggleModal}/>}</div>
+        <div className={`daily-view-modal__background${modalBgVisiblityClasses}`}>{this.state.isModalVisible && <DailyViewModal setNoteDescription={this.setNoteDescription} onToggleModal={this.onToggleModal} startTime={this.props.startTime}/>}</div>
       </section>
     );
   }
@@ -38,8 +38,9 @@ export class DailyViewRow extends React.Component {
 //   handleCreateActivity: expense => dispatch(temp)
 // });
 
-// const mapStateToProps = (state) => ({
-//   name: state.name
-// });
+const mapStateToProps = (state) => ({
+  // Replace with actual item from redux store later
+  activityBgColor: ' activity-bg-color'
+});
 
-export default connect()(DailyViewRow);
+export default connect(mapStateToProps)(DailyViewRow);
