@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render DailyViewModal correctly 1`] = `
+<div
+  className="daily-view-modal"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <h6>
+      Planner Modal
+    </h6>
+    <textarea
+      onChange={[Function]}
+      placeholder="Activity Description"
+      value=""
+    />
+    <DailyViewTimeSelector />
+    <div>
+      <button
+        className="button"
+        type="submit"
+      >
+        Save
+      </button>
+      <button
+        className="button"
+        onClick={[Function]}
+        type="button"
+      >
+        Clear Contents
+      </button>
+      <button
+        className="button"
+        onClick={[Function]}
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+`;

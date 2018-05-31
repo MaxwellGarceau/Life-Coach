@@ -14,12 +14,7 @@ export class DailyViewRow extends React.Component {
   }
   onToggleModal = () => {
     (this.state.isModalVisible == false) ? this.setState(() => ({ isModalVisible: true })) : this.setState(() => ({ isModalVisible: false }));
-    console.log('Toggle Modal');
   };
-  // closeModal = () => {
-  //   this.setState(() => ({ isModalVisible: false }));
-  //   console.log('Parent close Modal', this.state.isModalVisible);
-  // };
   setNoteDescription = (noteDescription) => {
     this.setState(() => ({ noteDescription }));
   };

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render DailyViewRow correctly 1`] = `
+<section
+  className="calendar__row--bg-color"
+>
+  <div
+    className="calendar__row"
+    onClick={[Function]}
+  >
+    <div />
+    <div
+      className="daily-view__description"
+    />
+  </div>
+  <div
+    className="daily-view-modal__background"
+  />
+</section>
+`;

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DailyViewTimeSelector from './DailyViewTimeSelector';
 
-class DailyViewModal extends React.Component {
+export class DailyViewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,6 @@ class DailyViewModal extends React.Component {
     this.onToggleModal();
   };
   onToggleModal = () => {
-    console.log('Close Modal');
     this.props.onToggleModal();
   };
   onClearNoteDescription = () => {
@@ -31,8 +30,8 @@ class DailyViewModal extends React.Component {
       <div className="daily-view-modal">
         <form onSubmit={this.onSubmit}>
           <h6>Planner Modal</h6>
-          <textarea 
-            onChange={this.onNoteDescriptionChange} 
+          <textarea
+            onChange={this.onNoteDescriptionChange}
             value={this.state.noteDescription}
             placeholder='Activity Description'
           />
