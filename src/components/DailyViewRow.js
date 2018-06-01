@@ -23,12 +23,12 @@ export class DailyViewRow extends React.Component {
     return (
       <section className={`calendar__row--bg-color${this.props.activityBgColor}`}>
     {/* Individual Calendar Row */}
-        <div id={this.props.startTime} className="calendar__row" onClick={this.onToggleModal}>
-          <div>{this.props.startTime}</div>
+        <div id={this.props.defaultStartTime} className="calendar__row" onClick={this.onToggleModal}>
+          <div>{this.props.defaultStartTime}</div>
           <div className="daily-view__description">{this.state.noteDescription}</div>
         </div>
       {/* Modal pop up for inputting activity */}
-        <div className={`daily-view-modal__background${modalBgVisiblityClasses}`}>{this.state.isModalVisible && <DailyViewModal setNoteDescription={this.setNoteDescription} onToggleModal={this.onToggleModal} startTime={this.props.startTime}/>}</div>
+        <div className={`daily-view-modal__background${modalBgVisiblityClasses}`}>{this.state.isModalVisible && <DailyViewModal setNoteDescription={this.setNoteDescription} onToggleModal={this.onToggleModal} defaultStartTime={this.props.defaultStartTime}/>}</div>
       </section>
     );
   }
