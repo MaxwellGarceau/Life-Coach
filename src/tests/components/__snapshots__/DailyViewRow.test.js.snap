@@ -2,7 +2,7 @@
 
 exports[`should render DailyViewRow correctly 1`] = `
 <section
-  className="calendar__row--bg-color"
+  className="calendar__row--bg-color activity-bg-color"
 >
   <div
     className="calendar__row"

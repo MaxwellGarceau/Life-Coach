@@ -5,33 +5,42 @@ exports[`should render DailyViewModal correctly 1`] = `
   className="daily-view-modal"
 >
   <form
+    id="daily-view-form"
     onSubmit={[Function]}
   >
-    <h6>
+    <h6
+      className="daily-view-modal__title"
+    >
       Planner Modal
     </h6>
     <textarea
+      className="daily-view-modal__body"
       onChange={[Function]}
       placeholder="Activity Description"
       value=""
     />
-    <DailyViewTimeSelector />
+    <DailyViewTimeSelector
+      defaultEndTime="3am"
+      defaultStartTime="1am"
+      handleEndTimeOnChange={[Function]}
+      handleStartTimeOnChange={[Function]}
+    />
     <div>
       <button
-        className="button"
+        className="button daily-view-modal__button"
         type="submit"
       >
         Save
       </button>
       <button
-        className="button"
+        className="button daily-view-modal__button"
         onClick={[Function]}
         type="button"
       >
         Clear Contents
       </button>
       <button
-        className="button"
+        className="button daily-view-modal__button"
         onClick={[Function]}
         type="button"
       >

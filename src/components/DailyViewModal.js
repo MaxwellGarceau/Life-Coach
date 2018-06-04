@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { startAddNote } from '../actions/notes';
 import DailyViewTimeSelector from './DailyViewTimeSelector';
 
 export class DailyViewModal extends React.Component {
@@ -39,6 +40,12 @@ export class DailyViewModal extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     // Send currentStartTime and currentEndTime to redux
+    const note = {
+      noteDescription: this.state.noteDescription,
+      currentStartTime: this.state.currentStartTime,
+      currentEndTime: this.state.currentEndTime
+    };
+    this.props.startAddNote(note);
     // Send note Description to redux instead
     this.props.setNoteDescription(this.state.noteDescription);
     this.onToggleModal();
@@ -98,4 +105,8 @@ export class DailyViewModal extends React.Component {
   }
 }
 
-export default DailyViewModal;
+const mapDispatchToProps = (dispatch) => ({
+  startAddNote: (note) => dispatch(startAddNote(note))
+})
+
+export default connect(undefined, mapDispatchToProps)(DailyViewModal);

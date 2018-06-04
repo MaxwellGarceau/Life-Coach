@@ -5,76 +5,76 @@ exports[`should render DailyView correctly 1`] = `
   className="calendar"
 >
   <Connect(DailyViewRow)
-    time="12am"
+    defaultStartTime="12am"
   />
   <Connect(DailyViewRow)
-    time="1am"
+    defaultStartTime="1am"
   />
   <Connect(DailyViewRow)
-    time="2am"
+    defaultStartTime="2am"
   />
   <Connect(DailyViewRow)
-    time="3am"
+    defaultStartTime="3am"
   />
   <Connect(DailyViewRow)
-    time="4am"
+    defaultStartTime="4am"
   />
   <Connect(DailyViewRow)
-    time="5am"
+    defaultStartTime="5am"
   />
   <Connect(DailyViewRow)
-    time="6am"
+    defaultStartTime="6am"
   />
   <Connect(DailyViewRow)
-    time="7am"
+    defaultStartTime="7am"
   />
   <Connect(DailyViewRow)
-    time="8am"
+    defaultStartTime="8am"
   />
   <Connect(DailyViewRow)
-    time="9am"
+    defaultStartTime="9am"
   />
   <Connect(DailyViewRow)
-    time="10am"
+    defaultStartTime="10am"
   />
   <Connect(DailyViewRow)
-    time="11am"
+    defaultStartTime="11am"
   />
   <Connect(DailyViewRow)
-    time="12pm"
+    defaultStartTime="12pm"
   />
   <Connect(DailyViewRow)
-    time="1pm"
+    defaultStartTime="1pm"
   />
   <Connect(DailyViewRow)
-    time="2pm"
+    defaultStartTime="2pm"
   />
   <Connect(DailyViewRow)
-    time="3pm"
+    defaultStartTime="3pm"
   />
   <Connect(DailyViewRow)
-    time="4pm"
+    defaultStartTime="4pm"
   />
   <Connect(DailyViewRow)
-    time="5pm"
+    defaultStartTime="5pm"
   />
   <Connect(DailyViewRow)
-    time="6pm"
+    defaultStartTime="6pm"
   />
   <Connect(DailyViewRow)
-    time="7pm"
+    defaultStartTime="7pm"
   />
   <Connect(DailyViewRow)
-    time="8pm"
+    defaultStartTime="8pm"
   />
   <Connect(DailyViewRow)
-    time="9pm"
+    defaultStartTime="9pm"
   />
   <Connect(DailyViewRow)
-    time="10pm"
+    defaultStartTime="10pm"
   />
   <Connect(DailyViewRow)
-    time="11pm"
+    defaultStartTime="11pm"
   />
 </div>
 `;

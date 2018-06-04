@@ -21,7 +21,8 @@ export class DailyViewRow extends React.Component {
   render (props) {
     let modalBgVisiblityClasses = this.state.isModalVisible ? ' visible opacity-full' : '';
     return (
-      <section className={`calendar__row--bg-color${this.props.activityBgColor}`}>
+      <section className={`calendar__row--bg-color${(this.props.test == this.props.defaultStartTime) ? ' activity-bg-color' : ''}`}>
+      {console.log(this.props.test)}
     {/* Individual Calendar Row */}
         <div id={this.props.defaultStartTime} className="calendar__row" onClick={this.onToggleModal}>
           <div>{this.props.defaultStartTime}</div>
@@ -40,7 +41,7 @@ export class DailyViewRow extends React.Component {
 
 const mapStateToProps = (state) => ({
   // Replace with actual item from redux store later
-  activityBgColor: ' activity-bg-color'
+  test: !!state.notes[0] ? state.notes[0].currentStartTime : ''
 });
 
 export default connect(mapStateToProps)(DailyViewRow);
