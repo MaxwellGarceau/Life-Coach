@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { startAddNote } from '../actions/notes';
 import DailyViewTimeSelector from './DailyViewTimeSelector';
+import determineElapsedTime from '../selectors/determine-elapsed-time';
 
 export class DailyViewModal extends React.Component {
   constructor(props) {
@@ -39,11 +40,12 @@ export class DailyViewModal extends React.Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    // Send currentStartTime and currentEndTime to redux
+    // Maybe also send an object with an array of times in between to redux
     const note = {
       noteDescription: this.state.noteDescription,
       currentStartTime: this.state.currentStartTime,
-      currentEndTime: this.state.currentEndTime
+      currentEndTime: this.state.currentEndTime,
+      elapsedTime: determineElapsedTime(this.state.currentStartTime, this.state.currentEndTime)
     };
     this.props.startAddNote(note);
     // Send note Description to redux instead
