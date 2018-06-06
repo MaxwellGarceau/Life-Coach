@@ -1,0 +1,29 @@
+.calendar__row--bg-color {
+  &-red {
+    @include calendar-background($calendar-red, white);
+  }
+  &-light-blue {
+    @include calendar-background($calendar-light-blue, white);
+  }
+  &-dark-blue {
+    @include calendar-background($calendar-dark-blue, white);
+  }
+  &-pink {
+    @include calendar-background($calendar-pink, white);
+  }
+  &-teal {
+    @include calendar-background($calendar-teal, white);
+  }
+  &-light-green {
+    @include calendar-background($calendar-light-green, white);
+  }
+  &-yellow {
+    @include calendar-background($calendar-yellow, white);
+  }
+  &-orange {
+    @include calendar-background($calendar-orange, white);
+  }
+  &-purple {
+    @include calendar-background($calendar-purple, white);
+  }
+}

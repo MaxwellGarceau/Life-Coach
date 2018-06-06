@@ -11,4 +11,7 @@
 
 .activity-bg-color {
   background-color: purple;
+  &:nth-child(odd) {
+    background-color: purple;
+  }
 }

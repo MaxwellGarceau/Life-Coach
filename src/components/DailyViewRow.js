@@ -15,41 +15,61 @@ export class DailyViewRow extends React.Component {
     };
   }
   onToggleModal = () => {
-    (this.state.isModalVisible == false) ? this.setState(() => ({ isModalVisible: true })) : this.setState(() => ({ isModalVisible: false }));
+    this.state.isModalVisible == false
+      ? this.setState(() => ({ isModalVisible: true }))
+      : this.setState(() => ({ isModalVisible: false }));
   };
   setNoteDescription = (noteDescription) => {
     this.setState(() => ({ noteDescription }));
   };
-  render (props) {
-    let arr = [];
-    let backgroundColorCheck = [null];
+  render(props) {
+    let backgroundColorCheck = null;
 
-    if (!backgroundColorCheck[0]) {
+    if (!backgroundColorCheck) {
       for (let i = 0; i < this.props.notes.length; i++) {
-        // console.log(this.props.notes[i].elapsedTime);
-        backgroundColorCheck = this.props.notes[i].elapsedTime.filter((time) => (time === this.props.defaultStartTime));
-        // backgroundColorCheck = backgroundColorCheck[0];
-        console.log(backgroundColorCheck[0]);
-        if (!!backgroundColorCheck[0]) {
+        backgroundColorCheck = this.props.notes[i].elapsedTime.filter(
+          (time) => time === this.props.defaultStartTime
+        );
+        backgroundColorCheck = backgroundColorCheck.join();
+        if (!!backgroundColorCheck) {
           break;
         }
-        // backgroundColorCheck = false;
       }
-      // this.props.notes.map((note) => {
-      //  backgroundColorCheck = note.elapsedTime.filter((time) => (time === this.props.defaultStartTime));
-      // });
-      // console.log('This is the matched time slot array', arr);
     }
-    let modalBgVisiblityClasses = this.state.isModalVisible ? ' visible opacity-full' : '';
+    let modalBgVisiblityClasses = this.state.isModalVisible
+      ? ' visible opacity-full'
+      : '';
     return (
-      <section className={`calendar__row--bg-color${(backgroundColorCheck[0] == this.props.defaultStartTime) ? ' activity-bg-color' : ''}`}>
-    {/* Individual Calendar Row */}
-        <div id={this.props.defaultStartTime} className="calendar__row" onClick={this.onToggleModal}>
+      <section
+        className={`calendar__row--bg-color${
+          backgroundColorCheck == this.props.defaultStartTime
+            ? ' activity-bg-color'
+            : ''
+        }`}
+      >
+        {/* Individual Calendar Row */}
+        <div
+          id={this.props.defaultStartTime}
+          className="calendar__row"
+          onClick={this.onToggleModal}
+        >
           <div>{this.props.defaultStartTime}</div>
-          <div className="daily-view__description">{this.state.noteDescription}</div>
+          <div className="daily-view__description">
+            {this.state.noteDescription}
+          </div>
         </div>
-      {/* Modal pop up for inputting activity */}
-        <div className={`daily-view-modal__background${modalBgVisiblityClasses}`}>{this.state.isModalVisible && <DailyViewModal setNoteDescription={this.setNoteDescription} onToggleModal={this.onToggleModal} defaultStartTime={this.props.defaultStartTime}/>}</div>
+        {/* Modal pop up for inputting activity */}
+        <div
+          className={`daily-view-modal__background${modalBgVisiblityClasses}`}
+        >
+          {this.state.isModalVisible && (
+            <DailyViewModal
+              setNoteDescription={this.setNoteDescription}
+              onToggleModal={this.onToggleModal}
+              defaultStartTime={this.props.defaultStartTime}
+            />
+          )}
+        </div>
       </section>
     );
   }

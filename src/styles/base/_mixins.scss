@@ -1,0 +1,10 @@
+// Calendar Background Color
+
+@mixin calendar-background($backgroundColor, $textColor) {
+  background-color: $backgroundColor;
+  color: $textColor;
+  &:nth-child(odd) {
+    background-color: $backgroundColor;
+    color: $textColor;
+  }
+}

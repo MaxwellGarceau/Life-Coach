@@ -1,5 +1,9 @@
+// Base/General
 @import './base/settings';
+@import './base/mixins';
 @import './base/base';
+
+// Modules
 @import './components/box-layout';
 @import './components/button';
 @import './components/header';
@@ -13,5 +17,6 @@
 @import './components/calendar';
 @import './components/modal';
 
+// Modifiers
 @import './components/calendar-background-colors';
 @import './components/visibility';

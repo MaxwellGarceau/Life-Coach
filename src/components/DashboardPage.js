@@ -1,10 +1,10 @@
 import React from 'react';
-import { DailyView } from './DailyView';
+// import { DailyView } from './DailyView';
+import LifeGoals from './LifeGoals';
 
 const DashboardPage = () => (
   <div>
-    Dashboard page content
-    <DailyView />
+    <LifeGoals />
   </div>
 );
 

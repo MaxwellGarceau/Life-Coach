@@ -1,7 +1,8 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 import DailyViewRow from './DailyViewRow';
 
-export class DailyView extends React.Component {
+export default class DailyView extends React.Component {
   render () {
     return (
       <div className="calendar">
