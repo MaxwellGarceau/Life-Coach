@@ -18,16 +18,14 @@ export class DailyViewRow extends React.Component {
       ? this.setState(() => ({ isModalVisible: true }))
       : this.setState(() => ({ isModalVisible: false }));
   };
-  setNoteDescription = (noteDescription) => {
-    this.setState(() => ({ noteDescription }));
-  };
   render(props) {
     let modalBgVisiblityClasses = this.state.isModalVisible
       ? ' visible opacity-full'
       : '';
 // Logic for determining assigned note and life goal match
-console.log(this.props.assignedNote);
     let currentLifeGoal = determineLifeGoal(this.props.lifeGoals, this.props.assignedNote)[0];
+    const primeAssignedNote = this.props.assignedNote[0];
+    const isDescriptionRow = primeAssignedNote && primeAssignedNote.currentStartTime === this.props.defaultStartTime;
     return (
       <section
         className={`calendar__row--bg-color ${currentLifeGoal ? currentLifeGoal.goalColor : ''}`}
@@ -40,7 +38,9 @@ console.log(this.props.assignedNote);
         >
           <div>{this.props.defaultStartTime}</div>
           <div className="daily-view__description">
-            {this.state.noteDescription}
+            {/*this.state.noteDescription*/}
+            {console.log(this.props.assignedNote[0])}
+            {!!isDescriptionRow && primeAssignedNote.noteDescription}
           </div>
         </div>
         {/* Modal pop up for inputting activity */}
@@ -49,7 +49,6 @@ console.log(this.props.assignedNote);
         >
           {this.state.isModalVisible && (
             <DailyViewModal
-              setNoteDescription={this.setNoteDescription}
               onToggleModal={this.onToggleModal}
               defaultStartTime={this.props.defaultStartTime}
             />
@@ -70,7 +69,6 @@ const mapStateToProps = (state, ownProps) => ({
   notes: state.notes,
   assignedNote: determineAssignedNote(state.notes, ownProps.defaultStartTime),
   lifeGoals: state.lifeGoals
-  // lifeGoals: determineLifeGoal(state.lifeGoals, this.assignedNote.bind(this))
 });
 
 export default connect(mapStateToProps)(DailyViewRow);

@@ -19,7 +19,7 @@ export class DailyViewModal extends React.Component {
     this.setState(() => ({ noteDescription }));
   };
   onSubmit = (e) => {
-    e.preventDefault();
+      e.preventDefault();
     // Maybe also send an object with an array of times in between to redux
     const note = {
       noteDescription: this.state.noteDescription,
@@ -29,16 +29,14 @@ export class DailyViewModal extends React.Component {
       goalId: this.state.goalId
     };
     this.props.startAddNote(note);
-    // Send note Description to redux instead
-    this.props.setNoteDescription(this.state.noteDescription);
     this.onToggleModal();
   };
   onToggleModal = () => {
     this.props.onToggleModal();
   };
+  // Need to delete note from redux with this function
   onClearNoteDescription = () => {
-    this.props.setNoteDescription('');
-    this.onToggleModal();
+      this.onToggleModal();
   };
   handleStartTimeOnChange = (currentStartTime) => {
     this.setState({ currentStartTime });
