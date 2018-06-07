@@ -2,9 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DailyViewModal from './DailyViewModal';
-import determineBackgroundColor from '../selectors/determine-background-color';
-
-let temp = false;
+import determineLifeGoal from '../selectors/determine-life-goal';
+import determineAssignedNote from '../selectors/determine-assigned-note';
 
 export class DailyViewRow extends React.Component {
   constructor(props) {
@@ -23,29 +22,15 @@ export class DailyViewRow extends React.Component {
     this.setState(() => ({ noteDescription }));
   };
   render(props) {
-    let backgroundColorCheck = null;
-
-    if (!backgroundColorCheck) {
-      for (let i = 0; i < this.props.notes.length; i++) {
-        backgroundColorCheck = this.props.notes[i].elapsedTime.filter(
-          (time) => time === this.props.defaultStartTime
-        );
-        backgroundColorCheck = backgroundColorCheck.join();
-        if (!!backgroundColorCheck) {
-          break;
-        }
-      }
-    }
     let modalBgVisiblityClasses = this.state.isModalVisible
       ? ' visible opacity-full'
       : '';
+// Logic for determining assigned note and life goal match
+console.log(this.props.assignedNote);
+    let currentLifeGoal = determineLifeGoal(this.props.lifeGoals, this.props.assignedNote)[0];
     return (
       <section
-        className={`calendar__row--bg-color${
-          backgroundColorCheck == this.props.defaultStartTime
-            ? ' activity-bg-color'
-            : ''
-        }`}
+        className={`calendar__row--bg-color ${currentLifeGoal ? currentLifeGoal.goalColor : ''}`}
       >
         {/* Individual Calendar Row */}
         <div
@@ -79,10 +64,13 @@ export class DailyViewRow extends React.Component {
 //   handleCreateActivity: expense => dispatch(temp)
 // });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   // Replace with actual item from redux store later
   test: !!state.notes[0] ? state.notes[0].currentStartTime : '',
-  notes: state.notes
+  notes: state.notes,
+  assignedNote: determineAssignedNote(state.notes, ownProps.defaultStartTime),
+  lifeGoals: state.lifeGoals
+  // lifeGoals: determineLifeGoal(state.lifeGoals, this.assignedNote.bind(this))
 });
 
 export default connect(mapStateToProps)(DailyViewRow);

@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { startAddNote } from '../actions/notes';
 import DailyViewTimeSelector from './DailyViewTimeSelector';
-import determineElapsedTime from '../selectors/determine-elapsed-time';
+import ModalGoalSelection from './ModalGoalSelection';
+import determineElapsedTime, { defaultEndTime } from '../selectors/determine-elapsed-time';
 
 export class DailyViewModal extends React.Component {
   constructor(props) {
@@ -10,30 +11,9 @@ export class DailyViewModal extends React.Component {
     this.state = {
       noteDescription: props.activity ? props.activity.noteDescription : '',
       currentStartTime: this.props.defaultStartTime,
-      currentEndTime: this.defaultEndTime()
+      currentEndTime: defaultEndTime(this.props.defaultStartTime)
     };
   }
-  defaultEndTime = () => {
-    let endTime = this.props.defaultStartTime;
-    let endTimeNum = endTime.match(/\d+/g);
-    endTimeNum = parseInt(endTimeNum, 10) + 2;
-    endTime = endTime.replace(/\d+/g, String(endTimeNum));
-    switch (endTime) {
-      case '13am':
-        endTime = '1pm';
-        break;
-      case '14am':
-        endTime = '2pm';
-        break;
-      case '13pm':
-        endTime = '1am';
-        break;
-      case '14pm':
-        endTime = '2am';
-        break;
-    }
-    return endTime;
-  };
   onNoteDescriptionChange = (e) => {
     const noteDescription = e.target.value;
     this.setState(() => ({ noteDescription }));
@@ -45,7 +25,8 @@ export class DailyViewModal extends React.Component {
       noteDescription: this.state.noteDescription,
       currentStartTime: this.state.currentStartTime,
       currentEndTime: this.state.currentEndTime,
-      elapsedTime: determineElapsedTime(this.state.currentStartTime, this.state.currentEndTime)
+      elapsedTime: determineElapsedTime(this.state.currentStartTime, this.state.currentEndTime),
+      goalId: this.state.goalId
     };
     this.props.startAddNote(note);
     // Send note Description to redux instead
@@ -65,6 +46,9 @@ export class DailyViewModal extends React.Component {
   handleEndTimeOnChange = (currentEndTime) => {
     this.setState({ currentEndTime });
   };
+  handleGoalId = (goalId) => {
+    this.setState({ goalId });
+  }
   render() {
     return (
       <div className="daily-view-modal">
@@ -78,9 +62,11 @@ export class DailyViewModal extends React.Component {
           />
           <DailyViewTimeSelector
             defaultStartTime={this.props.defaultStartTime}
-            defaultEndTime={this.defaultEndTime()}
             handleStartTimeOnChange={this.handleStartTimeOnChange}
             handleEndTimeOnChange={this.handleEndTimeOnChange}
+          />
+          <ModalGoalSelection 
+            handleGoalId={this.handleGoalId}
           />
           <div>
             <button className="button daily-view-modal__button" type="submit">

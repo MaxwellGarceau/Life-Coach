@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { defaultEndTime, endTimeStartTimeDifference } from '../selectors/determine-elapsed-time';
 
 class DailyViewTimeSelector extends React.Component {
   constructor(props) {
@@ -7,18 +8,25 @@ class DailyViewTimeSelector extends React.Component {
 
     this.state = {
       currentStartTime: this.props.defaultStartTime,
-      currentEndTime: this.props.defaultEndTime
+      currentEndTime: defaultEndTime(this.props.defaultStartTime)
     };
-  }
+  };
   handleStartTimeOnChange = (e) => {
     const currentStartTime = e.target.value;
-    this.setState({ currentStartTime });
+    const timeDifference = endTimeStartTimeDifference(this.state.currentStartTime, this.state.currentEndTime);
+    this.setState({ currentStartTime }, (prev) => {
+      this.handleEndTimeSetState(defaultEndTime(currentStartTime, timeDifference));
+    });
     this.props.handleStartTimeOnChange(currentStartTime);
+    
   };
   handleEndTimeOnChange = (e) => {
     const currentEndTime = e.target.value;
+    this.handleEndTimeSetState(currentEndTime);
+  };
+  handleEndTimeSetState = (currentEndTime) => {
     this.setState({ currentEndTime });
-    this.props.handleEndTimeOnChange(currentEndTime);
+    this.props.handleEndTimeOnChange(currentEndTime);    
   };
   render(props) {
     return (

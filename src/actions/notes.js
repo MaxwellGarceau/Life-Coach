@@ -13,9 +13,10 @@ export const startAddNote = (noteData = {}) => {
       noteDescription = '',
       currentStartTime = '',
       currentEndTime = '',
-      elapsedTime = []
+      elapsedTime = [],
+      goalId = ''
     } = noteData;
-    const note = { noteDescription, currentStartTime, currentEndTime, elapsedTime };
+    const note = { noteDescription, currentStartTime, currentEndTime, elapsedTime, goalId };
 
     return database
       .ref(`users/${uid}/notes`)
