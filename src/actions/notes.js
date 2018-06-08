@@ -30,3 +30,25 @@ export const startAddNote = (noteData = {}) => {
       });
   };
 }
+
+export const getNotes = (notes) => ({
+  type: 'GET_NOTES',
+  notes
+});
+
+export const startGetNotes = () => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+      const notes = [];
+
+      snapshot.forEach((childSnapshot) => {
+        notes.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+      dispatch(getNotes(notes));
+    });
+  };
+};

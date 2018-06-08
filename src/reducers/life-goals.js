@@ -19,6 +19,8 @@ export default (state = lifeGoalsReducerDefaultState, action) => {
       return state.filter(({ id }) => {
         return id !== action.id;
       });
+    case 'GET_LIFEGOALS':
+      return action.goals;
     default:
       return state;
   }

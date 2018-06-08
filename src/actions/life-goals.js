@@ -57,3 +57,25 @@ export const startRemoveLifeGoal = ({ id } = {}) => {
     });
   };
 }
+
+export const getGoals = (goals) => ({
+  type: 'GET_LIFEGOALS',
+  goals
+});
+
+export const startGetGoals = () => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/life-goals`).once('value').then((snapshot) => {
+      const goals = [];
+
+      snapshot.forEach((childSnapshot) => {
+        goals.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+      dispatch(getGoals(goals));
+    });
+  };
+};
