@@ -1,17 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { startAddLifeGoal } from '../actions/life-goals';
 
-class NewLifeGoal extends React.Component {
+class LifeGoalForm extends React.Component {
   constructor (props) {
     super(props);
-
     // Props are being passed in from EditLifeGoal
     this.state = {
-      goalColor: this.props.goalColor,
-      goalTitle: this.props.goalTitle,
-      goalDescription: this.props.goalDescription
+      goalColor: props.goal ? props.goal.goalColor : '',
+      goalTitle: props.goal ? props.goal.goalTitle : '',
+      goalDescription: props.goal ? props.goal.goalDescription : ''
     }
   }
   onSubmit = (e) => {
@@ -21,8 +17,7 @@ class NewLifeGoal extends React.Component {
       goalTitle: this.state.goalTitle,
       goalDescription: this.state.goalDescription
     };
-    this.props.startAddLifeGoal(lifeGoal);
-    this.handleExitPage();
+    this.props.onSubmit(lifeGoal);
   }
   handleExitPage = () => {
     this.props.history.push("/life-goals");
@@ -38,8 +33,6 @@ class NewLifeGoal extends React.Component {
   }
   render (props) {
     return (
-      <section>
-        <h1>New Life Goal</h1>
         <form onSubmit={this.onSubmit}>
           <input onChange={this.handleTitleOnChange} type="text" placeholder="Title" value={this.state.goalTitle} />
           <textarea onChange={this.handleTextAreaOnChange} placeholder="Description" value={this.state.goalDescription} />
@@ -60,13 +53,8 @@ class NewLifeGoal extends React.Component {
               <button onClick={this.handleExitPage} type="button">Cancel</button>
           </div>
         </form>
-      </section>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  startAddLifeGoal: (lifeGoal) => dispatch(startAddLifeGoal(lifeGoal))
-})
-
-export default connect(undefined, mapDispatchToProps)(NewLifeGoal);
+export default LifeGoalForm;

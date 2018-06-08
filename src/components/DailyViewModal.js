@@ -9,9 +9,9 @@ export class DailyViewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      noteDescription: props.activity ? props.activity.noteDescription : '',
-      currentStartTime: this.props.defaultStartTime,
-      currentEndTime: defaultEndTime(this.props.defaultStartTime)
+      noteDescription: props.assignedNote ? props.assignedNote.noteDescription : '',
+      currentStartTime: props.assignedNote ? props.assignedNote.currentStartTime : this.props.defaultStartTime,
+      currentEndTime: props.assignedNote ? props.assignedNote.currentEndTime : defaultEndTime(this.props.defaultStartTime)
     };
   }
   onNoteDescriptionChange = (e) => {
@@ -59,7 +59,8 @@ export class DailyViewModal extends React.Component {
             placeholder="Activity Description"
           />
           <DailyViewTimeSelector
-            defaultStartTime={this.props.defaultStartTime}
+            defaultStartTime={this.props.assignedNote ? this.props.assignedNote.currentStartTime : this.props.defaultStartTime}
+            defaultEndTime={this.props.assignedNote ? this.props.assignedNote.currentEndTime : ''}
             handleStartTimeOnChange={this.handleStartTimeOnChange}
             handleEndTimeOnChange={this.handleEndTimeOnChange}
           />

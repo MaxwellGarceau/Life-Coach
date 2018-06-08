@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LifeGoalsList from './LifeGoalsList';
-import NewLifeGoal from './NewLifeGoal';
+// import CreateLifeGoal from './CreateLifeGoal';
 
 class LifeGoals extends React.Component {
   // constructor (props) {

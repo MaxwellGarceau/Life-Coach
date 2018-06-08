@@ -38,7 +38,6 @@ export class DailyViewRow extends React.Component {
         >
           <div>{this.props.defaultStartTime}</div>
           <div className="daily-view__description">
-            {/*this.state.noteDescription*/}
             {console.log(this.props.assignedNote[0])}
             {!!isDescriptionRow && primeAssignedNote.noteDescription}
           </div>
@@ -51,6 +50,7 @@ export class DailyViewRow extends React.Component {
             <DailyViewModal
               onToggleModal={this.onToggleModal}
               defaultStartTime={this.props.defaultStartTime}
+              assignedNote={primeAssignedNote}
             />
           )}
         </div>

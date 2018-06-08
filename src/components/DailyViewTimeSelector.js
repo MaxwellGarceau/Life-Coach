@@ -7,8 +7,8 @@ class DailyViewTimeSelector extends React.Component {
     super(props);
 
     this.state = {
-      currentStartTime: this.props.defaultStartTime,
-      currentEndTime: defaultEndTime(this.props.defaultStartTime)
+      currentStartTime: props.defaultStartTime,
+      currentEndTime: props.defaultEndTime ? props.defaultEndTime : defaultEndTime(this.props.defaultStartTime)
     };
   };
   handleStartTimeOnChange = (e) => {
