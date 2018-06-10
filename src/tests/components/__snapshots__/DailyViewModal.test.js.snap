@@ -20,10 +20,13 @@ exports[`should render DailyViewModal correctly 1`] = `
       value=""
     />
     <DailyViewTimeSelector
-      defaultEndTime="3am"
+      defaultEndTime=""
       defaultStartTime="1am"
       handleEndTimeOnChange={[Function]}
       handleStartTimeOnChange={[Function]}
+    />
+    <Connect(ModalGoalSelection)
+      handleGoalId={[Function]}
     />
     <div>
       <button

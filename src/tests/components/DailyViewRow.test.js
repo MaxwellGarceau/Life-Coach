@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { DailyViewRow } from '../../components/DailyViewRow';
+import determineLifeGoal from '../../selectors/determine-life-goal';
+import determineAssignedNote from '../../selectors/determine-assigned-note';
 
 test('should render DailyViewRow correctly', () => {
   const wrapper = shallow(<DailyViewRow />);

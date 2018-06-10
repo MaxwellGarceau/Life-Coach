@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { defaultEndTime, endTimeStartTimeDifference } from '../selectors/determine-elapsed-time';
 
-class DailyViewTimeSelector extends React.Component {
+export class DailyViewTimeSelector extends React.Component {
   constructor(props) {
     super(props);
 
