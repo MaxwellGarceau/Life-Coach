@@ -8,6 +8,8 @@ import DailyView from '../components/DailyView';
 import WeekView from '../components/WeekView';
 import EditLifeGoal from '../components/EditLifeGoal';
 import CreateLifeGoal from '../components/CreateLifeGoal';
+import Calendar from '../components/calendar/Calendar';
+import MonthView from '../components/calendar/MonthView';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -21,9 +23,11 @@ const AppRouter = () => (
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
         <PrivateRoute path="/daily-calendar" component={DailyView} />
+        <PrivateRoute path="/calendar" component={Calendar} />
         <PrivateRoute path="/weekly-calendar" component={WeekView} />
         <PrivateRoute path="/life-goals" component={LifeGoals} />
         <PrivateRoute path="/create-goal" component={CreateLifeGoal} />
+        <PrivateRoute path="/TEST" component={MonthView} />
         <PrivateRoute path="/edit/:id" component={EditLifeGoal} />
         <Route component={NotFoundPage} />
       </Switch>
