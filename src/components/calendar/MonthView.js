@@ -5,19 +5,40 @@ import moment from 'moment';
 import MonthDays from './MonthDays';
 
 export class MonthView extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
   }
-  render(props) {
-    const startWeek = moment()
+  // handleIncreaseYear = () => {
+  //   this.setState((prevState) => { setYear: prevState.currentYear.add(1, 'years') });
+  // };
+  // handleDecreaseYear = () => {
+  //   this.setState((prevState) => { setYear: prevState.currentYear.subtract(1, 'years') });
+  // };
+  render (props) {
+    // console.log(this.props.currentYear);
+    const year = this.props.currentYear;
+    console.log('year props', this.props.currentYear);
+    const startWeek = year
       .month((this.props.month || ''))
       .startOf('month')
       .week();
-    console.log('moment start week', startWeek);
-    const endWeek = moment()
+    // console.log(year.month(this.props.month));
+    let endWeek = year
       .month((this.props.month || ''))
       .endOf('month')
       .week();
+
+    // const startWeek = moment()
+    //   .setYear(200, 'years')
+    //   .month((this.props.month || ''))
+    //   .startOf('month')
+    //   .week();
+    // let endWeek = moment()
+    //   .month((this.props.month || ''))
+    //   .endOf('month')
+    //   .week();
+
+    if (endWeek === 1) { endWeek = 53; }
 
     let calendar = [];
     for (let week = startWeek; week <= endWeek; week++) {
@@ -26,7 +47,7 @@ export class MonthView extends React.Component {
         days: Array(7)
           .fill(0)
           .map((n, i) =>
-            moment()
+            year
               .week(week)
               .startOf('week')
               .clone()
@@ -35,9 +56,10 @@ export class MonthView extends React.Component {
           )
       });
     }
+    // console.log(calendar.days);
     return (
       <section>
-        <h1>Testing Month View</h1>
+        <h1>{this.props.month}</h1>
         <div>
           {calendar.map((weekArr) => {
             return (
@@ -57,6 +79,8 @@ export class MonthView extends React.Component {
 //   handleCreateActivity: expense => dispatch(temp)
 // });
 
-const mapStateToProps = (state, ownProps) => ({});
+const mapStateToProps = (state, ownProps) => ({
+  // currentYear: state.
+});
 
 export default connect(mapStateToProps)(MonthView);

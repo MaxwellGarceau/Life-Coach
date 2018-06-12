@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import moment from 'moment';
+import moment from 'moment';
 import YearView from './YearView';
 import MonthView from './MonthView';
 import DailyView from '../DailyView';

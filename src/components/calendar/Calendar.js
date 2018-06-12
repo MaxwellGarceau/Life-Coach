@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import moment from 'moment';
+import moment from 'moment';
 import CalendarViewSelector from './CalendarViewSelector';
 import YearView from './YearView';
 import MonthView from './MonthView';
@@ -14,7 +14,6 @@ export class Calendar extends React.Component {
       selectedCalendarView: DailyView,
       selectedCalendarProps: {}
     }
-
   }
 
   handleSelectedCalendarView = (selectedCalendarView, selectedCalendarProps = {}) => {
@@ -29,7 +28,7 @@ export class Calendar extends React.Component {
       <section>
         <CalendarViewSelector handleSelectedCalendarView={this.handleSelectedCalendarView} />
         {/*<SelectedCalendarView selectedCalendarView={this.state.selectedCalendarView} />*/}
-        <SelectedCalendarView {...this.state.selectedCalendarProps} />
+        <SelectedCalendarView />
       </section>
     );
   }
