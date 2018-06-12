@@ -11,13 +11,17 @@ export class Calendar extends React.Component {
     super(props);
 
     this.state = {
-      selectedCalendarView: DailyView
+      selectedCalendarView: DailyView,
+      selectedCalendarProps: {}
     }
 
   }
 
-  handleSelectedCalendarView = (selectedCalendarView) => {
-    this.setState({ selectedCalendarView });
+  handleSelectedCalendarView = (selectedCalendarView, selectedCalendarProps = {}) => {
+    this.setState({ 
+      selectedCalendarView,
+      selectedCalendarProps
+    });
   }
   render(props) {
     const SelectedCalendarView = this.state.selectedCalendarView;
@@ -25,7 +29,7 @@ export class Calendar extends React.Component {
       <section>
         <CalendarViewSelector handleSelectedCalendarView={this.handleSelectedCalendarView} />
         {/*<SelectedCalendarView selectedCalendarView={this.state.selectedCalendarView} />*/}
-        <SelectedCalendarView />
+        <SelectedCalendarView {...this.state.selectedCalendarProps} />
       </section>
     );
   }

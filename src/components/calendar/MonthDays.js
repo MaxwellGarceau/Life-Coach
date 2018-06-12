@@ -6,9 +6,12 @@ export class MonthView extends React.Component {
   constructor(props) {
     super(props);
   }
+  handleDayView = () => {
+    console.log('Navigate to specific day view calendar with date/ID', this.props.date);
+  }
   render(props) {
     return (
-      <div>
+      <div onClick={this.handleDayView}>
         {this.props.date}
       </div>
     );
@@ -19,6 +22,9 @@ export class MonthView extends React.Component {
 //   handleCreateActivity: expense => dispatch(temp)
 // });
 
-const mapStateToProps = (state, ownProps) => ({});
+const mapStateToProps = (state, ownProps) => ({
+  // Uncomment once I create calendarDay in redux store
+  // calendarDay: state.calendarDate.find((date) => date.id === ownProps.date)
+});
 
 export default connect(mapStateToProps)(MonthView);

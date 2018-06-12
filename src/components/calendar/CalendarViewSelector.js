@@ -10,6 +10,7 @@ export class CalendarViewSelector extends React.Component {
     super(props);
   }
   handleSelectedCalendarView = (selectedCalendarView) => {
+    let selectedCalendarProps;
     switch(selectedCalendarView.target.value) {
       case 'YearView':
         selectedCalendarView = YearView;
@@ -24,7 +25,7 @@ export class CalendarViewSelector extends React.Component {
         selectedCalendarView = DailyView;
         break;
     }
-    this.props.handleSelectedCalendarView(selectedCalendarView);
+    this.props.handleSelectedCalendarView(selectedCalendarView, selectedCalendarProps);
   }
   render(props) {
     return (

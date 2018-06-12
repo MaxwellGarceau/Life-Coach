@@ -8,9 +8,13 @@ export class YearView extends React.Component {
     super(props);
   }
   render(props) {
+    const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return (
       <section>
         <h1>Year View (Need to Finish)</h1>
+        {monthsArr.map((month) => {
+          return <MonthView month={month}/>;
+        })}
       </section>
     );
   }

@@ -10,10 +10,12 @@ export class MonthView extends React.Component {
   }
   render(props) {
     const startWeek = moment()
+      .month((this.props.month || ''))
       .startOf('month')
       .week();
-      // .format();
+    console.log('moment start week', startWeek);
     const endWeek = moment()
+      .month((this.props.month || ''))
       .endOf('month')
       .week();
 
