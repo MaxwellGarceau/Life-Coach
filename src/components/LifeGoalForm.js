@@ -1,4 +1,5 @@
 import React from 'react';
+import { history } from '../routers/AppRouter';
 
 class LifeGoalForm extends React.Component {
   constructor (props) {
@@ -20,7 +21,7 @@ class LifeGoalForm extends React.Component {
     this.props.onSubmit(lifeGoal);
   }
   handleExitPage = () => {
-    this.props.history.push("/life-goals");
+    history.push("/goals");
   }
   setGoalColor = (e) => {
     this.setState({ goalColor: e.target.classList[0] });

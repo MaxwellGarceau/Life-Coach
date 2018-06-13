@@ -4,6 +4,8 @@ import moment from 'moment';
 import { getMonth } from '../../component-logic/calendar/generate-calendar-dates';
 import { startSetYear } from '../../actions/calendar';
 import MonthDays from './MonthDays';
+import WeekView from './WeekView';
+import CalendarViewSelector from './CalendarViewSelector';
 
 export class MonthView extends React.Component {
   constructor (props) {
@@ -29,16 +31,12 @@ export class MonthView extends React.Component {
     });
   };  
   handleIncreaseYear = () => {
-    // this.setState((prevState) => ({ monthViewAddRemoveYear: prevState.monthViewAddRemoveYear += 1 }), () => {
       const yearUpdateIncrease = (!this.props.currentYear ? 0 : this.props.currentYear) + 1;
       this.props.startSetYear(yearUpdateIncrease);
-    // });
   };
   handleDecreaseYear = () => {
-    // this.setState((prevState) => ({ monthViewAddRemoveYear: prevState.monthViewAddRemoveYear -= 1 }), () => {
       const yearUpdateDecrease = (!this.props.currentYear ? 0 : this.props.currentYear) - 1;
       this.props.startSetYear(yearUpdateDecrease);
-    // });
   };
   render (props) {
     // Put logic before return in generate-calendar-dates file
@@ -77,6 +75,7 @@ export class MonthView extends React.Component {
     }
     return (
       <section>
+
         <h1>{this.props.month || month.clone().format('MMMM')}, {year.format('YYYY')}</h1>
         {!this.props.month &&
         <div>
@@ -87,11 +86,7 @@ export class MonthView extends React.Component {
         <div>
           {calendar.map((weekArr) => {
             return (
-              <div key={weekArr.week}>
-                {weekArr.days.map((date) => {
-                  return <MonthDays key={date} date={date} />;
-                })}
-              </div>);
+              <WeekView key={weekArr.week} weekArr={weekArr} />);
           })}
         </div>
       </section>

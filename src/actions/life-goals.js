@@ -17,7 +17,7 @@ export const startAddLifeGoal = (lifeGoalData = {}) => {
     const lifeGoal = { goalColor, goalTitle, goalDescription };
 
     return database
-      .ref(`users/${uid}/life-goals`)
+      .ref(`users/${uid}/goals`)
       .push(lifeGoal)
       .then(ref => {
         dispatch(
@@ -38,7 +38,7 @@ export const editLifeGoal = (id, updates) => ({
 export const startEditLifeGoal = (id, updates) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    return database.ref(`users/${uid}/life-goals/${id}`).update(updates).then(() => {
+    return database.ref(`users/${uid}/goals/${id}`).update(updates).then(() => {
       dispatch(editLifeGoal(id, updates));
     });
   };
@@ -52,7 +52,7 @@ export const removeLifeGoal = ({ id } = {}) => ({
 export const startRemoveLifeGoal = ({ id } = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    return database.ref(`users/${uid}/life-goals/${id}`).remove().then(() => {
+    return database.ref(`users/${uid}/goals/${id}`).remove().then(() => {
       dispatch(removeLifeGoal({ id }));
     });
   };
@@ -66,7 +66,7 @@ export const getGoals = (goals) => ({
 export const startGetGoals = () => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    return database.ref(`users/${uid}/life-goals`).once('value').then((snapshot) => {
+    return database.ref(`users/${uid}/goals`).once('value').then((snapshot) => {
       const goals = [];
 
       snapshot.forEach((childSnapshot) => {

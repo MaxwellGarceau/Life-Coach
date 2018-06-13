@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'font-awesome/css/font-awesome.css';
 import MonthView from './MonthView';
 import { startSetYear } from '../../actions/calendar';
+import CalendarViewSelector from './CalendarViewSelector';
 
 export class YearView extends React.Component {
   constructor(props) {

@@ -9,7 +9,7 @@ class CreateLifeGoal extends React.Component {
   }
   onSubmit = (lifeGoal) => {
     this.props.startAddLifeGoal(lifeGoal);
-    this.props.history.push("/life-goals");
+    this.props.history.push("/goals");
   }
   render (props) {
     return (

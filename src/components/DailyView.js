@@ -1,12 +1,17 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
+import moment from 'moment';
 import DailyViewRow from './DailyViewRow';
+import CalendarViewSelector from './calendar/CalendarViewSelector';
 
 export default class DailyView extends React.Component {
   render (props) {
+    const currentDate = this.props.match ? moment(new Date(this.props.match.params.id)) : '';
+    
     return (
       <section>
-        <h1>{this.props.weekDay || 'Make Algorithm For Current Day Of Week'}</h1>
+        <h1>{!!this.props.match ? currentDate.format('dddd') : 'Fix this.props.match.params.id'}</h1>
+        <h2>Current date: {!!this.props.match ? currentDate.format('MMMM Do, YYYY') : 'Fix this.props.match.params.id'}</h2>
         <div className="calendar">
           <DailyViewRow defaultStartTime={'12am'} />
           <DailyViewRow defaultStartTime={'1am'} />

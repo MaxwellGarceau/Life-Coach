@@ -6,11 +6,11 @@ import LifeGoalForm from './LifeGoalForm';
 class EditLifeGoal extends React.Component {
   onSubmit = (lifeGoal) => {
     this.props.startEditLifeGoal(this.props.goal.id, lifeGoal);
-    this.props.history.push("/life-goals");
+    this.props.history.push("/goals");
   }
   handleOnRemove = () => {
     this.props.startRemoveLifeGoal({ id: this.props.goal.id });
-    this.props.history.push("/life-goals");    
+    this.props.history.push("/goals");    
   }
   render (props) {
     return (
@@ -18,7 +18,6 @@ class EditLifeGoal extends React.Component {
         <h1>Edit Life Goal</h1>
         <div>
         <LifeGoalForm
-          history={this.props.history}
           goal={this.props.goal}
           onSubmit={this.onSubmit}
         />

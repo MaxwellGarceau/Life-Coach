@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Router, Route, Switch, NavLink } from 'react-router-dom';
 import LifeGoalsList from './LifeGoalsList';
+// import EditLifeGoal from './EditLifeGoal';
 // import CreateLifeGoal from './CreateLifeGoal';
 
 class LifeGoals extends React.Component {
@@ -11,7 +13,7 @@ class LifeGoals extends React.Component {
     return (
       <section>
         <h1>Life Goals</h1>
-        <Link to="/create-goal">
+        <Link to="goals/create">
           <button>Create New Goal</button>
         </Link>
         <LifeGoalsList />

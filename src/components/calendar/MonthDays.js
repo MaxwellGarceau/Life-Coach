@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { history } from '../../routers/AppRouter';
 import moment from 'moment';
 
 export class MonthView extends React.Component {
@@ -8,6 +9,7 @@ export class MonthView extends React.Component {
   }
   handleDayView = () => {
     console.log('Navigate to specific day view calendar with date/ID', this.props.date);
+    history.push(`/calendar/day/${this.props.date}`);    
   }
   render(props) {
     return (

@@ -4,12 +4,14 @@ import createHistory from 'history/createBrowserHistory';
 import DashboardPage from '../components/DashboardPage';
 import LoginPage from '../components/LoginPage';
 import LifeGoals from '../components/LifeGoals';
-import DailyView from '../components/DailyView';
-import WeekView from '../components/WeekView';
 import EditLifeGoal from '../components/EditLifeGoal';
 import CreateLifeGoal from '../components/CreateLifeGoal';
 import Calendar from '../components/calendar/Calendar';
+import CalendarViewSelector from '../components/calendar/CalendarViewSelector';
+import YearView from '../components/calendar/YearView';
 import MonthView from '../components/calendar/MonthView';
+import WeekView from '../components/calendar/WeekView';
+import DailyView from '../components/DailyView';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -22,13 +24,18 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
+        {/* Calendar */}
+        <PrivateRoute path="/calendar/year" component={YearView} calendarViewSelector={true} />
+        <PrivateRoute path="/calendar/month" component={MonthView} calendarViewSelector={true} />
+        <PrivateRoute path="/calendar/week" component={WeekView} calendarViewSelector={true} />
+        <PrivateRoute path="/calendar/day/:id" component={DailyView} calendarViewSelector={true} />
+        {/* Delete daily-calendar path later */}
         <PrivateRoute path="/daily-calendar" component={DailyView} />
         <PrivateRoute path="/calendar" component={Calendar} />
-        <PrivateRoute path="/weekly-calendar" component={WeekView} />
-        <PrivateRoute path="/life-goals" component={LifeGoals} />
-        <PrivateRoute path="/create-goal" component={CreateLifeGoal} />
-        <PrivateRoute path="/TEST" component={MonthView} />
-        <PrivateRoute path="/edit/:id" component={EditLifeGoal} />
+        {/* Life Goals */}
+        <PrivateRoute path="/goals/edit/:id" component={EditLifeGoal} />
+        <PrivateRoute path="/goals/create" component={CreateLifeGoal} />
+        <PrivateRoute path="/goals" component={LifeGoals} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
