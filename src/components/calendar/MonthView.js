@@ -1,42 +1,61 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-
+import { getMonth } from '../../component-logic/calendar/generate-calendar-dates';
+import { startSetYear } from '../../actions/calendar';
 import MonthDays from './MonthDays';
 
 export class MonthView extends React.Component {
   constructor (props) {
     super(props);
+
+    this.state = {
+      currentMonth: 0,
+      monthViewAddRemoveYear: 0
+    }
   }
-  // handleIncreaseYear = () => {
-  //   this.setState((prevState) => { setYear: prevState.currentYear.add(1, 'years') });
-  // };
-  // handleDecreaseYear = () => {
-  //   this.setState((prevState) => { setYear: prevState.currentYear.subtract(1, 'years') });
-  // };
+  handleIncreaseMonth = () => {
+    this.setState((prevState) => ({ currentMonth: prevState.currentMonth += 1 }), () => {
+      if ('January' === getMonth(this.state.currentMonth).clone().format('MMMM')) {
+        this.handleIncreaseYear();
+      }
+    });
+  };
+  handleDecreaseMonth = () => {
+    this.setState((prevState) => ({ currentMonth: prevState.currentMonth -= 1 }), () => {
+      if ('December' === getMonth(this.state.currentMonth).clone().format('MMMM')) {
+        this.handleDecreaseYear();
+      }
+    });
+  };  
+  handleIncreaseYear = () => {
+    // this.setState((prevState) => ({ monthViewAddRemoveYear: prevState.monthViewAddRemoveYear += 1 }), () => {
+      const yearUpdateIncrease = (!this.props.currentYear ? 0 : this.props.currentYear) + 1;
+      this.props.startSetYear(yearUpdateIncrease);
+    // });
+  };
+  handleDecreaseYear = () => {
+    // this.setState((prevState) => ({ monthViewAddRemoveYear: prevState.monthViewAddRemoveYear -= 1 }), () => {
+      const yearUpdateDecrease = (!this.props.currentYear ? 0 : this.props.currentYear) - 1;
+      this.props.startSetYear(yearUpdateDecrease);
+    // });
+  };
   render (props) {
-    // console.log(this.props.currentYear);
-    const year = this.props.currentYear;
-    console.log('year props', this.props.currentYear);
-    const startWeek = year
+    // Put logic before return in generate-calendar-dates file
+    const year = moment().add(this.props.currentYear, 'years');
+    const month = moment().add(this.state.currentMonth, 'months');
+
+    const startWeek = year.clone()
       .month((this.props.month || ''))
+      .add(this.state.currentMonth, 'months')
       .startOf('month')
       .week();
-    // console.log(year.month(this.props.month));
-    let endWeek = year
+
+    let endWeek = year.clone()
       .month((this.props.month || ''))
+      .add(this.state.currentMonth, 'months')
       .endOf('month')
       .week();
-
-    // const startWeek = moment()
-    //   .setYear(200, 'years')
-    //   .month((this.props.month || ''))
-    //   .startOf('month')
-    //   .week();
-    // let endWeek = moment()
-    //   .month((this.props.month || ''))
-    //   .endOf('month')
-    //   .week();
 
     if (endWeek === 1) { endWeek = 53; }
 
@@ -47,7 +66,7 @@ export class MonthView extends React.Component {
         days: Array(7)
           .fill(0)
           .map((n, i) =>
-            year
+            year.clone()
               .week(week)
               .startOf('week')
               .clone()
@@ -56,10 +75,15 @@ export class MonthView extends React.Component {
           )
       });
     }
-    // console.log(calendar.days);
     return (
       <section>
-        <h1>{this.props.month}</h1>
+        <h1>{this.props.month || month.clone().format('MMMM')}, {year.format('YYYY')}</h1>
+        {!this.props.month &&
+        <div>
+          <span onClick={this.handleDecreaseMonth}><i className="fa fa-arrow-circle-left" /></span>
+          <span onClick={this.handleIncreaseMonth}><i className="fa fa-arrow-circle-right" /></span>
+        </div>
+        }
         <div>
           {calendar.map((weekArr) => {
             return (
@@ -75,12 +99,12 @@ export class MonthView extends React.Component {
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   handleCreateActivity: expense => dispatch(temp)
-// });
-
-const mapStateToProps = (state, ownProps) => ({
-  // currentYear: state.
+const mapDispatchToProps = (dispatch) => ({
+  startSetYear: (currentYear) => dispatch(startSetYear(currentYear))
 });
 
-export default connect(mapStateToProps)(MonthView);
+const mapStateToProps = (state, ownProps) => ({
+  currentYear: state.calendar.currentYear
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MonthView);

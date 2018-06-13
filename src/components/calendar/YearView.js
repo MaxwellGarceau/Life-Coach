@@ -10,30 +10,35 @@ export class YearView extends React.Component {
     super(props);
 
     this.state = {
-      currentYear: moment()
+      currentYear: this.props.currentYear || 0
     }
   }
   handleIncreaseYear = () => {
-    this.setState((prevState) => ({ currentYear: prevState.currentYear.add(1, 'years') }), () => {
+    this.setState((prevState) => ({ currentYear: prevState.currentYear += 1 }), () => {
       this.props.startSetYear(this.state.currentYear);
     });
   };
   handleDecreaseYear = () => {
-    this.setState((prevState) => ({ currentYear: prevState.currentYear.subtract(1, 'years') }));
+    this.setState((prevState) => ({ currentYear: prevState.currentYear -= 1 }), () => {
+      this.props.startSetYear(this.state.currentYear);
+    });
   };
+  handleSetYear = () => {
+    return moment().add(this.props.currentYear, 'years').year();
+  }
   render (props) {
     const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return (
       <section>
         <div>
-          <h1>Year Selector</h1>
+          <h1>{this.handleSetYear()}</h1>
           <div>
             <span onClick={this.handleDecreaseYear}><i className="fa fa-arrow-circle-left" /></span>
             <span onClick={this.handleIncreaseYear}><i className="fa fa-arrow-circle-right" /></span>
           </div>
         </div>
         {monthsArr.map((month) => {
-          return <MonthView key={month} month={month} currentYear={this.state.currentYear} />;
+          return <MonthView key={month} month={month} />;
         })}
       </section>
     );
@@ -44,6 +49,8 @@ const mapDispatchToProps = (dispatch) => ({
   startSetYear: (currentYear) => dispatch(startSetYear(currentYear))
 });
 
-const mapStateToProps = (state, ownProps) => ({});
+const mapStateToProps = (state, ownProps) => ({
+  currentYear: state.calendar.currentYear
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(YearView);
