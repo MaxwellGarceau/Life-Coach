@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DailyViewModal from './DailyViewModal';
-import determineLifeGoal from '../selectors/determine-life-goal';
-import determineAssignedNote from '../selectors/determine-assigned-note';
+import determineLifeGoal from '../../selectors/determine-life-goal';
+import determineAssignedNote from '../../selectors/determine-assigned-note';
 
 export class DailyViewRow extends React.Component {
   constructor(props) {
@@ -36,9 +36,8 @@ export class DailyViewRow extends React.Component {
           className="calendar__row"
           onClick={this.onToggleModal}
         >
-          <div>{this.props.defaultStartTime}</div>
+          <div>{this.props.defaultStartTime} : {this.props.currentDate}</div>
           <div className="daily-view__description">
-            {console.log(this.props.assignedNote[0])}
             {!!isDescriptionRow && primeAssignedNote.noteDescription}
           </div>
         </div>
@@ -51,6 +50,7 @@ export class DailyViewRow extends React.Component {
               onToggleModal={this.onToggleModal}
               defaultStartTime={this.props.defaultStartTime}
               assignedNote={primeAssignedNote}
+              currentDate={this.props.currentDate}
             />
           )}
         </div>
@@ -67,7 +67,8 @@ const mapStateToProps = (state, ownProps) => ({
   // Replace with actual item from redux store later
   test: !!state.notes[0] ? state.notes[0].currentStartTime : '',
   notes: state.notes,
-  assignedNote: determineAssignedNote(state.notes, ownProps.defaultStartTime),
+  // Using ownProps for date selection. Maybe switch to redux later
+  assignedNote: determineAssignedNote(state.notes, ownProps.defaultStartTime, ownProps.currentDate),
   lifeGoals: state.lifeGoals
 });
 

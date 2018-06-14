@@ -24,22 +24,22 @@ export class YearView extends React.Component {
       this.props.startSetYear(this.state.currentYear);
     });
   };
-  handleSetYear = () => {
-    return moment().add(this.props.currentYear, 'years').year();
-  }
+  // handleSetYear = () => {
+  //   return moment().add(this.props.currentYear, 'years').year();
+  // }
   render (props) {
     const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return (
       <section>
         <div>
-          <h1>{this.handleSetYear()}</h1>
+          <h1>{this.props.currentYear}</h1>
           <div>
             <span onClick={this.handleDecreaseYear}><i className="fa fa-arrow-circle-left" /></span>
             <span onClick={this.handleIncreaseYear}><i className="fa fa-arrow-circle-right" /></span>
           </div>
         </div>
         {monthsArr.map((month) => {
-          return <MonthView key={month} month={month} />;
+          return <MonthView key={month} yearViewAssignedMonth={month} />;
         })}
       </section>
     );

@@ -17,7 +17,6 @@ export const PrivateRoute = ({
         <div>
           <Header />
           {calendarViewSelector && <CalendarViewSelector />}
-          {console.log('Calendar View Selector', props.calendarViewSelector)}
           <Component {...props} />
         </div>
       ) : (

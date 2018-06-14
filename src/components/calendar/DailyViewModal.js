@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddNote } from '../actions/notes';
+import { startAddNote } from '../../actions/notes';
 import DailyViewTimeSelector from './DailyViewTimeSelector';
 import ModalGoalSelection from './ModalGoalSelection';
-import determineElapsedTime, { defaultEndTime } from '../selectors/determine-elapsed-time';
+import determineElapsedTime, { defaultEndTime } from '../../selectors/determine-elapsed-time';
 
 export class DailyViewModal extends React.Component {
   constructor(props) {
@@ -26,7 +26,8 @@ export class DailyViewModal extends React.Component {
       currentStartTime: this.state.currentStartTime,
       currentEndTime: this.state.currentEndTime,
       elapsedTime: determineElapsedTime(this.state.currentStartTime, this.state.currentEndTime),
-      goalId: this.state.goalId
+      goalId: this.state.goalId,
+      currentDate: this.props.currentDate
     };
     this.props.startAddNote(note);
     this.onToggleModal();
@@ -94,6 +95,11 @@ export class DailyViewModal extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   startAddNote: (note) => dispatch(startAddNote(note))
-})
+});
 
-export default connect(undefined, mapDispatchToProps)(DailyViewModal);
+const mapStateToProps = (state, ownProps) => ({
+  // Using props that are passed down instead of redux for currentDate
+  // currentDate: state.calendar.currentDate
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DailyViewModal);

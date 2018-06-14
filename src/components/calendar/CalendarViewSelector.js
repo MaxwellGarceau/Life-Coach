@@ -4,7 +4,7 @@ import moment from 'moment';
 import YearView from './YearView';
 import MonthView from './MonthView';
 import WeekView from './WeekView';
-import DailyView from '../DailyView';
+import DailyView from './DailyView';
 import { history } from '../../routers/AppRouter';
 
 export class CalendarViewSelector extends React.Component {
@@ -29,7 +29,7 @@ export class CalendarViewSelector extends React.Component {
         break;
       case 'DailyView':
         // selectedCalendarView = DailyView;
-        history.push('/calendar/day');
+        history.push(`/calendar/day/${this.props.currentDate}`);
         break;
       default:
         // selectedCalendarView = DailyView;
@@ -55,6 +55,8 @@ export class CalendarViewSelector extends React.Component {
 //   handleCreateActivity: expense => dispatch(temp)
 // });
 
-const mapStateToProps = (state, ownProps) => ({});
+const mapStateToProps = (state, ownProps) => ({
+  currentDate: state.calendar.currentDate
+});
 
 export default connect(mapStateToProps)(CalendarViewSelector);

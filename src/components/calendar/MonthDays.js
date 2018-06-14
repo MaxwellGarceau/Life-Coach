@@ -1,15 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { history } from '../../routers/AppRouter';
 import moment from 'moment';
 
-export class MonthView extends React.Component {
+// Redux
+import { connect } from 'react-redux';
+import { startSetDate } from '../../actions/calendar';
+
+export class MonthDays extends React.Component {
   constructor(props) {
     super(props);
   }
   handleDayView = () => {
     console.log('Navigate to specific day view calendar with date/ID', this.props.date);
-    history.push(`/calendar/day/${this.props.date}`);    
+    this.props.startSetDate(this.props.date);
+    history.push(`/calendar/day/${this.props.date}`);
   }
   render(props) {
     return (
@@ -20,13 +24,13 @@ export class MonthView extends React.Component {
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   handleCreateActivity: expense => dispatch(temp)
-// });
+const mapDispatchToProps = dispatch => ({
+  startSetDate: (currentDate) => dispatch(startSetDate(currentDate))
+});
 
 const mapStateToProps = (state, ownProps) => ({
   // Uncomment once I create calendarDay in redux store
   // calendarDay: state.calendarDate.find((date) => date.id === ownProps.date)
 });
 
-export default connect(mapStateToProps)(MonthView);
+export default connect(undefined, mapDispatchToProps)(MonthDays);

@@ -6,7 +6,7 @@ import CalendarViewSelector from './CalendarViewSelector';
 import YearView from './YearView';
 import MonthView from './MonthView';
 import WeekView from './WeekView';
-import DailyView from '../DailyView';
+import DailyView from './DailyView';
 
 export class Calendar extends React.Component {
   // constructor(props) {

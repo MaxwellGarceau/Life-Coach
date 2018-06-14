@@ -11,7 +11,7 @@ import CalendarViewSelector from '../components/calendar/CalendarViewSelector';
 import YearView from '../components/calendar/YearView';
 import MonthView from '../components/calendar/MonthView';
 import WeekView from '../components/calendar/WeekView';
-import DailyView from '../components/DailyView';
+import DailyView from '../components/calendar/DailyView';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
