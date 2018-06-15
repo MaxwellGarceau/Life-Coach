@@ -26,8 +26,7 @@ class ModalGoalSelection extends React.Component {
             <option value="errands">Errands</option>
             {this.props.lifeGoals.length > 0 && this.props.lifeGoals.map(goal => {
               return <option key={goal.id} value={goal.id}>{goal.goalTitle}</option>;
-            })
-            }
+            })}
           </select>
         </div>
       </div>

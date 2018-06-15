@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddNote } from '../../actions/notes';
+import { startAddNote, startRemoveNote, startEditNote } from '../../actions/notes';
 import DailyViewTimeSelector from './DailyViewTimeSelector';
 import ModalGoalSelection from './ModalGoalSelection';
 import determineElapsedTime, { defaultEndTime } from '../../selectors/determine-elapsed-time';
@@ -11,7 +11,9 @@ export class DailyViewModal extends React.Component {
     this.state = {
       noteDescription: props.assignedNote ? props.assignedNote.noteDescription : '',
       currentStartTime: props.assignedNote ? props.assignedNote.currentStartTime : this.props.defaultStartTime,
-      currentEndTime: props.assignedNote ? props.assignedNote.currentEndTime : defaultEndTime(this.props.defaultStartTime)
+      currentEndTime: props.assignedNote ? props.assignedNote.currentEndTime : defaultEndTime(this.props.defaultStartTime),
+      assignedNoteId: props.assignedNote ? props.assignedNote.id : undefined,
+      goalId: props.assignedNote ? props.assignedNote.goalId : undefined
     };
   }
   onNoteDescriptionChange = (e) => {
@@ -22,6 +24,7 @@ export class DailyViewModal extends React.Component {
       e.preventDefault();
     // Maybe also send an object with an array of times in between to redux
     const note = {
+      id: this.state.assignedNoteId,
       noteDescription: this.state.noteDescription,
       currentStartTime: this.state.currentStartTime,
       currentEndTime: this.state.currentEndTime,
@@ -29,15 +32,15 @@ export class DailyViewModal extends React.Component {
       goalId: this.state.goalId,
       currentDate: this.props.currentDate
     };
-    this.props.startAddNote(note);
+    note.id ? this.props.startEditNote(note) : this.props.startAddNote(note);
     this.onToggleModal();
   };
   onToggleModal = () => {
     this.props.onToggleModal();
   };
-  // Need to delete note from redux with this function
   onClearNoteDescription = () => {
-      this.onToggleModal();
+    this.props.startRemoveNote(this.state.assignedNoteId)
+    this.onToggleModal();
   };
   handleStartTimeOnChange = (currentStartTime) => {
     this.setState({ currentStartTime });
@@ -78,7 +81,7 @@ export class DailyViewModal extends React.Component {
               type="button"
               onClick={this.onClearNoteDescription}
             >
-              Clear Contents
+              Clear Note
             </button>
             <button
               className="button daily-view-modal__button"
@@ -95,7 +98,9 @@ export class DailyViewModal extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddNote: (note) => dispatch(startAddNote(note))
+  startAddNote: (note) => dispatch(startAddNote(note)),
+  startRemoveNote: (noteId) => dispatch(startRemoveNote(noteId)),
+  startEditNote: (editedNote) => dispatch(startEditNote(editedNote))
 });
 
 const mapStateToProps = (state, ownProps) => ({
