@@ -15,6 +15,7 @@ export class DailyViewRow extends React.Component {
     this.state = {
       isModalVisible: false
     };
+    // this.noteDisplayStart = React.createRef();
   }
   onToggleModal = () => {
     this.state.isModalVisible == false
@@ -22,6 +23,21 @@ export class DailyViewRow extends React.Component {
       : this.setState(() => ({ isModalVisible: false }));
   };
   render(props) {
+
+// // TEST
+// const bodyRect = document.body.getBoundingClientRect();
+// console.log ('bodyRect', bodyRect);
+// // const firstRow = document.querySelector(`#note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`);
+// console.log(this.noteDisplayStart);
+// const firstRow = this.noteDisplayStart.current;
+// console.log('firstRow', firstRow);
+// // const firstRowRect = firstRow.getBoundingClientRect();
+// // console.log('firstRowRect', firstRowRect);
+//     // offset   = elemRect.top - bodyRect.top;
+
+// // alert('Element is ' + offset + ' vertical pixels from <body>');
+// // TEST END
+
     let modalBgVisiblityClasses = this.state.isModalVisible
       ? ' visible opacity-full'
       : '';
@@ -32,6 +48,8 @@ export class DailyViewRow extends React.Component {
     return (
       <section
         className={`calendar__row--bg-color ${currentLifeGoal ? currentLifeGoal.goalColor : ''}`}
+        id={`note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`}
+        // ref={this.noteDisplayStart}
       >
         {/* Individual Calendar Row */}
         <div
@@ -57,6 +75,7 @@ export class DailyViewRow extends React.Component {
             />
           )}
         </div>
+        <div id={`note-display-${this.props.currentDate}-end-${this.props.defaultStartTime}`}></div>
       </section>
     );
   }

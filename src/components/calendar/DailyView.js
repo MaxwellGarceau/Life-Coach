@@ -30,7 +30,6 @@ export class DailyView extends React.Component {
     const weekViewAssignedDate = this.props.weekViewAssignedDate ? formatSetDate(this.props.weekViewAssignedDate, 'YYYY-MM-DD', 0, '', 'MM-DD-YYYY') : false;
     const currentDate = weekViewAssignedDate || reduxCurrentDate;
     const currentDateFormat = formatSetDate(currentDate, 'MM-DD-YYYY');
-
     return (
       <section>
         {!weekViewAssignedDate &&
