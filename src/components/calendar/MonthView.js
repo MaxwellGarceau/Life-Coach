@@ -8,7 +8,7 @@ import { startSetDate } from '../../actions/calendar';
 
 // Component Imports
 import MonthWeek from './MonthWeek';
-import MonthSelectorArrows from './MonthSelectorArrows';
+import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
 
 // Component Logic
 import { generateCalendarDates, formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
@@ -35,8 +35,8 @@ export class MonthView extends React.Component {
       <section>
         <h1 onClick={this.handleGoToMonth}>{this.props.yearViewAssignedMonth || monthFormat}, {yearFormat}</h1>
         {!this.props.yearViewAssignedMonth &&
-          <MonthSelectorArrows />
-        }        
+          <CalendarViewSelectorArrows dateFormat={'months'}/>
+        }
         <div>
           {this.handleGenerateCalendarDates().map((weekArr) => {
             return (

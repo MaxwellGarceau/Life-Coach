@@ -7,6 +7,7 @@ import 'font-awesome/css/font-awesome.css';
 // Component/Action Imports
 import MonthView from './MonthView';
 import { startSetDate } from '../../actions/calendar';
+import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
 
 // Component Logic
 import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
@@ -15,14 +16,14 @@ export class YearView extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleIncreaseYear = () => {
-    const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', 1, 'years');
-    this.props.startSetDate(dateUpdate);
-  };
-  handleDecreaseYear = () => {
-    const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', -1, 'years');
-    this.props.startSetDate(dateUpdate);
-  };
+  // handleIncreaseYear = () => {
+  //   const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', 1, 'years');
+  //   this.props.startSetDate(dateUpdate);
+  // };
+  // handleDecreaseYear = () => {
+  //   const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', -1, 'years');
+  //   this.props.startSetDate(dateUpdate);
+  // };
   render (props) {
     // console.log('previous logic', moment().year(2018));
     // console.log('new logic', moment(this.props.currentDate));
@@ -32,10 +33,13 @@ export class YearView extends React.Component {
       <section>
         <div>
           <h1>{yearFormat}</h1>
+          <CalendarViewSelectorArrows dateFormat={'years'}/>
+          {/*
           <div>
             <span onClick={this.handleDecreaseYear}><i className="fa fa-arrow-circle-left" /></span>
             <span onClick={this.handleIncreaseYear}><i className="fa fa-arrow-circle-right" /></span>
           </div>
+        */}
         </div>
         {monthsArr.map((month) => {
           return <MonthView key={month} yearViewAssignedMonth={month} />;

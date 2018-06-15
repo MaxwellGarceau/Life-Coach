@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import moment from 'moment';
 
 // Component Imports
-import WeekSelectorArrows from './WeekSelectorArrows';
+import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
 // import MonthDays from './MonthDays';
 // import CalendarViewSelector from './CalendarViewSelector';
 import DailyView from './DailyView';
@@ -22,7 +22,7 @@ class WeekView extends React.Component {
     return (
       <section>
         <h4>WEEK BREAK</h4>
-        <WeekSelectorArrows />
+        <CalendarViewSelectorArrows dateFormat={'weeks'}/>
         {newWeek.days.map((weekViewAssignedDate) => {
           return <DailyView key={weekViewAssignedDate} weekViewAssignedDate={weekViewAssignedDate} />;
         })}

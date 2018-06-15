@@ -67,6 +67,7 @@ export class DailyViewModal extends React.Component {
           />
           <ModalGoalSelection 
             handleGoalId={this.handleGoalId}
+            assignedNote={this.props.assignedNote}
           />
           <div>
             <button className="button daily-view-modal__button" type="submit">

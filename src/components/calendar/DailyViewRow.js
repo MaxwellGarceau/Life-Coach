@@ -5,6 +5,9 @@ import DailyViewModal from './DailyViewModal';
 import determineLifeGoal from '../../selectors/determine-life-goal';
 import determineAssignedNote from '../../selectors/determine-assigned-note';
 
+// Component Logic
+import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
+
 export class DailyViewRow extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +39,7 @@ export class DailyViewRow extends React.Component {
           className="calendar__row"
           onClick={this.onToggleModal}
         >
-          <div>{this.props.defaultStartTime} : {this.props.currentDate}</div>
+          <div>{this.props.defaultStartTime}</div>
           <div className="daily-view__description">
             {!!isDescriptionRow && primeAssignedNote.noteDescription}
           </div>

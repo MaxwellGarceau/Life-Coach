@@ -1,12 +1,14 @@
+// 3rd Party Components
 import React from 'react';
 import { history } from '../../routers/AppRouter';
 import { connect } from 'react-redux';
-// import moment from 'moment';
-import DailyViewRow from './DailyViewRow';
-// import CalendarViewSelector from './CalendarViewSelector';
 
 // Redux
 import { startSetDate } from '../../actions/calendar';
+
+// Components
+import DailyViewRow from './DailyViewRow';
+import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
 
 // Component Logic
 import { timeArr, formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
@@ -24,18 +26,18 @@ export class DailyView extends React.Component {
     }
   }
   render (props) {
-    // const currentDate = this.props.match ? moment(new Date(this.props.match.params.id)) : '';
     const reduxCurrentDate = this.props.currentDate;
-    const weekViewAssignedDate = this.props.weekViewAssignedDate;
+    const weekViewAssignedDate = this.props.weekViewAssignedDate ? formatSetDate(this.props.weekViewAssignedDate, 'YYYY-MM-DD', 0, '', 'MM-DD-YYYY') : false;
     const currentDate = weekViewAssignedDate || reduxCurrentDate;
-    // console.log(currentDate);
+    const currentDateFormat = formatSetDate(currentDate, 'MM-DD-YYYY');
 
     return (
       <section>
-        {/*<h1>{!!this.props.match ? currentDate.format('dddd') : 'Fix this.props.match.params.id'}</h1>
-        <h2>Current date: {!!this.props.match ? currentDate.format('MMMM Do, YYYY') : 'Fix this.props.match.params.id'}</h2>*/}
-        <h1 onClick={this.handleGoToDay}>{currentDate}</h1>
-        <h2>Current date: {currentDate}</h2>
+        {!weekViewAssignedDate &&
+          <CalendarViewSelectorArrows dateFormat={'days'}/>
+        }
+        <h1 onClick={this.handleGoToDay}>{currentDateFormat}</h1>
+        <h2>Current date: {currentDateFormat}</h2>
         <div className="calendar">
           {timeArr.map((defaultStartTime) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} />;
