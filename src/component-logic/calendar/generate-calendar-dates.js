@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { connect } from 'react-redux';
 
 // NEW LOGIC FOR JUST USING DATE IN REDUX
 export const formatSetDate = (inputDate, format = 'YYYY-MM-DD', amount = 0, unitOfTime = 'seconds', inputDateFormat = '') => {
@@ -21,12 +20,6 @@ export const getMonth = (currentMonth = '') => (moment().month(currentMonth));
 export const getYear = (currentYear = '') => (moment().year(currentYear));
 
 export const timeArr = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
-
-// export const startWeekFunc = (currentYear, currentMonth, yearViewAssignedMonth = false) => getYear(currentYear).clone()
-//   .month((yearViewAssignedMonth || currentMonth))
-//   // .add(monthChange, 'months')
-//   .startOf('month')
-//   .week();
 
 // NEW LOGIC BEGIN
 export const startWeekFunc = (currentDate, yearViewAssignedMonth = false) => {
@@ -65,6 +58,16 @@ export const createWeekFunc = (startWeek, endWeek = startWeek, currentDate) => {
   }
   return calendarArr;
 };
+
+export const generateCalendarDates = (currentDate, yearViewAssignedMonth) => {
+  const startWeek = startWeekFunc(currentDate, yearViewAssignedMonth);
+  let endWeek = endWeekFunc(currentDate, yearViewAssignedMonth);
+
+  if (endWeek === 1) {
+    endWeek = 53;
+  }
+  return createWeekFunc(startWeek, endWeek, currentDate);
+}
 
 // END NEW LOGIC
 
@@ -126,14 +129,3 @@ export const createWeekFunc = (startWeek, endWeek = startWeek, currentDate) => {
 //   }
 //   return calendar;
 // }
-
-// NEW LOGIC BEGIN
-export const generateCalendarDates = (currentDate, yearViewAssignedMonth) => {
-  const startWeek = startWeekFunc(currentDate, yearViewAssignedMonth);
-  let endWeek = endWeekFunc(currentDate, yearViewAssignedMonth);
-
-  if (endWeek === 1) {
-    endWeek = 53;
-  }
-  return createWeekFunc(startWeek, endWeek, currentDate);
-}

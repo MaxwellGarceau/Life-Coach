@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 // Component Imports
 import WeekSelectorArrows from './WeekSelectorArrows';
-import MonthDays from './MonthDays';
-import CalendarViewSelector from './CalendarViewSelector';
+// import MonthDays from './MonthDays';
+// import CalendarViewSelector from './CalendarViewSelector';
 import DailyView from './DailyView';
 
 // Component Logic
-import { generateCalendarDates, startWeekFunc, createWeekFunc } from '../../component-logic/calendar/generate-calendar-dates';
+import { createWeekFunc, formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 
 class WeekView extends React.Component {
   // constructor (props) {
@@ -17,14 +17,13 @@ class WeekView extends React.Component {
 
   // }
   render (props) {
-    let calendar = [];
-    createWeekFunc(calendar, this.props.currentWeek, this.props.currentYear);
-    // console.log(createWeekFunc(calendar, startWeekFunc(this.props.currentYear, this.props.currentMonth), this.props.currentYear));
+    const currentWeek = formatSetDate(this.props.currentDate, 'w');
+    const newWeek = createWeekFunc(currentWeek, undefined, this.props.currentDate)[0];
     return (
       <section>
         <h4>WEEK BREAK</h4>
         <WeekSelectorArrows />
-        {calendar[0].days.map((weekViewAssignedDate) => {
+        {newWeek.days.map((weekViewAssignedDate) => {
           return <DailyView key={weekViewAssignedDate} weekViewAssignedDate={weekViewAssignedDate} />;
         })}
       </section>
@@ -32,10 +31,7 @@ class WeekView extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  currentYear: state.calendar.currentYear,
-  currentMonth: state.calendar.currentMonth,
-  currentWeek: state.calendar.currentWeek,
+const mapStateToProps = (state) => ({
   currentDate: state.calendar.currentDate
 });
 

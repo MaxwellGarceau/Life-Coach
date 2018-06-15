@@ -24,8 +24,8 @@ export class YearView extends React.Component {
     this.props.startSetDate(dateUpdate);
   };
   render (props) {
-    console.log('previous logic', moment().year(2018));
-    console.log('new logic', moment(this.props.currentDate));
+    // console.log('previous logic', moment().year(2018));
+    // console.log('new logic', moment(this.props.currentDate));
     const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const yearFormat = formatSetDate(this.props.currentDate, 'YYYY');
     return (

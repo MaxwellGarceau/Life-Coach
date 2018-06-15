@@ -1,64 +1,26 @@
 // 3rd Party Imports
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 // Redux
-import { startSetYear, startSetMonth, startSetWeek } from '../../actions/calendar';
+import { startSetDate } from '../../actions/calendar';
 
 // Component Logic
-import { generateCalendarDates, getMonth, getYear, getWeekToMonth } from '../../component-logic/calendar/generate-calendar-dates';
+import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 
 class MonthSelectorArrows extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentMonth: this.props.currentMonth,
-      currentWeek: this.props.currentWeek
-    }
   }
   handleIncreaseWeek = () => {
-    this.setState((prevState) => ({ currentWeek: prevState.currentWeek += 1 }), () => {
-        if (getWeekToMonth(this.props.currentWeek) !== getWeekToMonth(this.state.currentWeek)) {
-          this.handleIncreaseMonth();
-        }
-      this.props.startSetWeek(this.state.currentWeek);
-    });
+  const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', 1, 'weeks');
+  this.props.startSetDate(dateUpdate);
   };
   handleDecreaseWeek = () => {
-    this.setState((prevState) => ({ currentWeek: prevState.currentWeek -= 1 }), () => {
-        if (getWeekToMonth(this.props.currentWeek) !== getWeekToMonth(this.state.currentWeek)) {
-          this.handleDecreaseMonth();
-        }
-      this.props.startSetWeek(this.state.currentWeek);
-    });
-  };
-  handleIncreaseMonth = () => {
-    this.setState((prevState) => ({ currentMonth: prevState.currentMonth += 1 }), () => {
-      this.props.startSetMonth(this.state.currentMonth)
-        if ('January' === getMonth(this.state.currentMonth).clone().format('MMMM')) {
-          this.handleIncreaseYear();
-        }
-    });
-  };
-  handleDecreaseMonth = () => {
-    this.setState((prevState) => ({ currentMonth: prevState.currentMonth -= 1 }), () => {
-      this.props.startSetMonth(this.state.currentMonth);
-      if ('December' === getMonth(this.state.currentMonth).clone().format('MMMM')) {
-        this.handleDecreaseYear();
-      }
-    });
-  };
-  handleIncreaseYear = () => {
-      this.props.startSetYear(this.props.currentYear + 1);
-  };
-  handleDecreaseYear = () => {
-      this.props.startSetYear(this.props.currentYear - 1);
+  const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', -1, 'weeks');
+  this.props.startSetDate(dateUpdate);
   };
   render (props) {
-    console.log('moment string Im working on', moment(this.props.currentDate).startOf('week').add(1, 'day').format('MM-DD-YYYY'));
-    console.log('in use moment string', moment().year(2018).week(24).startOf('week').add(1, 'day').format('MM-DD-YYYY'));
     return (
       <div>
         <span onClick={this.handleDecreaseWeek}><i className="fa fa-arrow-circle-left" /></span>
@@ -69,15 +31,10 @@ class MonthSelectorArrows extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startSetMonth: (currentMonth) => dispatch(startSetMonth(currentMonth)),
-  startSetYear: (currentYear) => dispatch(startSetYear(currentYear)),
-  startSetWeek: (currentWeek) => dispatch(startSetWeek(currentWeek))
+  startSetDate: (currentDate) => dispatch(startSetDate(currentDate))
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  currentYear: state.calendar.currentYear,
-  currentMonth: state.calendar.currentMonth,
-  currentWeek: state.calendar.currentWeek,
   currentDate: state.calendar.currentDate
 });
 

@@ -1,4 +1,4 @@
-import database from '../firebase/firebase';
+// import database from '../firebase/firebase';
 // import thunk from 'redux-thunk';
 
 export const setYear = (currentYear) => ({
