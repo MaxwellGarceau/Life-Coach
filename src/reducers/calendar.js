@@ -6,7 +6,7 @@ import { startWeekFunc } from '../component-logic/calendar/generate-calendar-dat
 const calendarReducerDefaultState = {
   currentYear: moment().year(),
   currentMonth: moment().month(),
-  currentDate: moment().format('MM-DD-YYYY'),
+  currentDate: moment().format('YYYY-MM-DD'),
   currentWeek: startWeekFunc(moment().year(), moment().month())
 };
 

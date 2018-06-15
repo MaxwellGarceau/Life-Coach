@@ -57,6 +57,8 @@ class MonthSelectorArrows extends React.Component {
       this.props.startSetYear(this.props.currentYear - 1);
   };
   render (props) {
+    console.log('moment string Im working on', moment(this.props.currentDate).startOf('week').add(1, 'day').format('MM-DD-YYYY'));
+    console.log('in use moment string', moment().year(2018).week(24).startOf('week').add(1, 'day').format('MM-DD-YYYY'));
     return (
       <div>
         <span onClick={this.handleDecreaseWeek}><i className="fa fa-arrow-circle-left" /></span>
@@ -75,7 +77,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state, ownProps) => ({
   currentYear: state.calendar.currentYear,
   currentMonth: state.calendar.currentMonth,
-  currentWeek: state.calendar.currentWeek
+  currentWeek: state.calendar.currentWeek,
+  currentDate: state.calendar.currentDate
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MonthSelectorArrows);

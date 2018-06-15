@@ -3,36 +3,39 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import 'font-awesome/css/font-awesome.css';
 import MonthView from './MonthView';
-import { startSetYear } from '../../actions/calendar';
+import { startSetYear, startSetDate } from '../../actions/calendar';
 import CalendarViewSelector from './CalendarViewSelector';
+
+// Component Logic
+import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 
 export class YearView extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentYear: this.props.currentYear || 0
-    }
   }
   handleIncreaseYear = () => {
-    this.setState((prevState) => ({ currentYear: prevState.currentYear += 1 }), () => {
-      this.props.startSetYear(this.state.currentYear);
-    });
+    // this.setState((prevState) => ({ currentYear: prevState.currentYear += 1 }), () => {
+      // this.props.startSetYear(this.state.currentYear);
+    // });
+    // this.setState((prevState) => ({ currentYear: moment(prevState.currentYear).add(1, 'years').format('YYYY-MM-DD') }));
+    // this.setState((prevState) => ({ currentYear: formatSetDate(prevState.currentYear, 1, 'years', 'YYYY-MM-DD') }));
+    const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', 1, 'years');
+    this.props.startSetDate(dateUpdate);
   };
   handleDecreaseYear = () => {
-    this.setState((prevState) => ({ currentYear: prevState.currentYear -= 1 }), () => {
-      this.props.startSetYear(this.state.currentYear);
-    });
+    // this.setState((prevState) => ({ currentYear: prevState.currentYear -= 1 }), () => {
+    //   this.props.startSetYear(this.state.currentYear);
+    // });
+    const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', -1, 'years');
+    this.props.startSetDate(dateUpdate);
   };
-  // handleSetYear = () => {
-  //   return moment().add(this.props.currentYear, 'years').year();
-  // }
   render (props) {
     const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const yearFormat = formatSetDate(this.props.currentDate, 'YYYY');
     return (
       <section>
         <div>
-          <h1>{this.props.currentYear}</h1>
+          <h1>{yearFormat}</h1>
           <div>
             <span onClick={this.handleDecreaseYear}><i className="fa fa-arrow-circle-left" /></span>
             <span onClick={this.handleIncreaseYear}><i className="fa fa-arrow-circle-right" /></span>
@@ -47,11 +50,13 @@ export class YearView extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startSetYear: (currentYear) => dispatch(startSetYear(currentYear))
+  startSetYear: (currentYear) => dispatch(startSetYear(currentYear)),
+  startSetDate: (currentDate) => dispatch(startSetDate(currentDate))
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  currentYear: state.calendar.currentYear
+  currentYear: state.calendar.currentYear,
+  currentDate: state.calendar.currentDate
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(YearView);

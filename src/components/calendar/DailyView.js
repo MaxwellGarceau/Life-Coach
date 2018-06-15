@@ -14,7 +14,7 @@ export class DailyView extends React.Component {
     const reduxCurrentDate = this.props.currentDate;
     const weekViewAssignedDate = this.props.weekViewAssignedDate;
     const currentDate = weekViewAssignedDate || reduxCurrentDate;
-    console.log(currentDate);
+    // console.log(currentDate);
 
     return (
       <section>

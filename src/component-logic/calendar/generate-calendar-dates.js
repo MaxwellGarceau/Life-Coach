@@ -1,6 +1,11 @@
 import moment from 'moment';
 import { connect } from 'react-redux';
 
+// NEW LOGIC FOR JUST USING DATE IN REDUX
+export const formatSetDate = (prevDate, format = 'YYYY-MM-DD', amount = 0, unitOfTime = '') => {
+  return moment(prevDate).add(amount, unitOfTime).format(format);
+}
+
 export const getWeekToMonth = (weekNum) => {
   return moment().week(weekNum).month();
 }
@@ -29,6 +34,8 @@ export const createWeekFunc = (calendarArr, week, currentYear) => {
       .map((n, i) =>
         getYear(currentYear).clone()
           .week(week)
+        // parseInt(moment().week('06-14-2018').format('gg'))
+        // moment(currentDate)
           .startOf('week')
           .clone()
           .add(n + i, 'day')

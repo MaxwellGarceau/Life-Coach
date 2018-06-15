@@ -35,7 +35,8 @@ class WeekView extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   currentYear: state.calendar.currentYear,
   currentMonth: state.calendar.currentMonth,
-  currentWeek: state.calendar.currentWeek
+  currentWeek: state.calendar.currentWeek,
+  currentDate: state.calendar.currentDate
 });
 
 export default connect(mapStateToProps)(WeekView);
