@@ -1,46 +1,26 @@
 // 3rd Party Imports
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+// import moment from 'moment';
 
 // Redux
-import { startSetYear, startSetMonth } from '../../actions/calendar';
+import { startSetDate } from '../../actions/calendar';
 
 // Component Logic
-import { generateCalendarDates, getMonth, getYear } from '../../component-logic/calendar/generate-calendar-dates';
+import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 
 class MonthSelectorArrows extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      currentMonth: this.props.currentMonth
-    }
   }
-  handleIncreaseMonth = () => {
-    this.setState((prevState) => ({ currentMonth: prevState.currentMonth += 1 }), () => {
-      this.props.startSetMonth(this.state.currentMonth)
-        if ('January' === getMonth(this.state.currentMonth).clone().format('MMMM')) {
-          this.handleIncreaseYear();
-        }
-    });
-  };
-  handleDecreaseMonth = () => {
-    this.setState((prevState) => ({ currentMonth: prevState.currentMonth -= 1 }), () => {
-      this.props.startSetMonth(this.state.currentMonth);
-      if ('December' === getMonth(this.state.currentMonth).clone().format('MMMM')) {
-        this.handleDecreaseYear();
-      }
-    });
-  };
-  handleIncreaseYear = () => {
-      // const yearUpdateIncrease = (!this.props.currentYear ? 0 : this.props.currentYear) + 1;
-      this.props.startSetYear(this.props.currentYear + 1);
-  };
-  handleDecreaseYear = () => {
-      // const yearUpdateDecrease = (!this.props.currentYear ? 0 : this.props.currentYear) - 1;
-      this.props.startSetYear(this.props.currentYear - 1);
-  };
+    handleIncreaseMonth = () => {
+    const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', 1, 'months');
+    this.props.startSetDate(dateUpdate);
+    };
+    handleDecreaseMonth = () => {
+    const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', -1, 'months');
+    this.props.startSetDate(dateUpdate);
+    };
   render (props) {
     return (
       <div>
@@ -52,13 +32,11 @@ class MonthSelectorArrows extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startSetMonth: (currentMonth) => dispatch(startSetMonth(currentMonth)),
-  startSetYear: (currentYear) => dispatch(startSetYear(currentYear))
+  startSetDate: (currentDate) => dispatch(startSetDate(currentDate))
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  currentYear: state.calendar.currentYear,
-  currentMonth: state.calendar.currentMonth
+  currentDate: state.calendar.currentDate
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MonthSelectorArrows);

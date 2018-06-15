@@ -1,10 +1,12 @@
+// 3rd Party imports
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import 'font-awesome/css/font-awesome.css';
+
+// Component/Action Imports
 import MonthView from './MonthView';
-import { startSetYear, startSetDate } from '../../actions/calendar';
-import CalendarViewSelector from './CalendarViewSelector';
+import { startSetDate } from '../../actions/calendar';
 
 // Component Logic
 import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
@@ -14,22 +16,16 @@ export class YearView extends React.Component {
     super(props);
   }
   handleIncreaseYear = () => {
-    // this.setState((prevState) => ({ currentYear: prevState.currentYear += 1 }), () => {
-      // this.props.startSetYear(this.state.currentYear);
-    // });
-    // this.setState((prevState) => ({ currentYear: moment(prevState.currentYear).add(1, 'years').format('YYYY-MM-DD') }));
-    // this.setState((prevState) => ({ currentYear: formatSetDate(prevState.currentYear, 1, 'years', 'YYYY-MM-DD') }));
     const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', 1, 'years');
     this.props.startSetDate(dateUpdate);
   };
   handleDecreaseYear = () => {
-    // this.setState((prevState) => ({ currentYear: prevState.currentYear -= 1 }), () => {
-    //   this.props.startSetYear(this.state.currentYear);
-    // });
     const dateUpdate = formatSetDate(this.props.currentDate, 'YYYY-MM-DD', -1, 'years');
     this.props.startSetDate(dateUpdate);
   };
   render (props) {
+    console.log('previous logic', moment().year(2018));
+    console.log('new logic', moment(this.props.currentDate));
     const monthsArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const yearFormat = formatSetDate(this.props.currentDate, 'YYYY');
     return (
@@ -50,12 +46,10 @@ export class YearView extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  startSetYear: (currentYear) => dispatch(startSetYear(currentYear)),
   startSetDate: (currentDate) => dispatch(startSetDate(currentDate))
 });
 
 const mapStateToProps = (state, ownProps) => ({
-  currentYear: state.calendar.currentYear,
   currentDate: state.calendar.currentDate
 });
 
