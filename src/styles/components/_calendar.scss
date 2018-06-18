@@ -1,7 +1,7 @@
 .calendar {
-  &__row {
-    min-height: 75px;
-  }
+  // &__row {
+  //   min-height: $calendar-row-size;
+  // }
     &__row--bg-color {
         &:nth-child(odd) {
         background-color: $light-grey;

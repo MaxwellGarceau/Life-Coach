@@ -41,8 +41,10 @@ export class DailyView extends React.Component {
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
           })}
-          <div className="calendar__item calendar__item-event" style={{gridRow: '2 / 3'}}>Created calendar events go here.</div>
-          
+          <div className="calendar__container-event">
+            {/* Create a CalendarEvent component instead of using a div */}
+            <div className="calendar__item-event" style={{gridRow: '2 / 5', zIndex: '3', gridColumn: '1 / 2'}}>Created calendar events go here.</div>
+          </div>
         </div>
         {/*<div className="calendar-event-container">
           <div className="calendar-event-test">Created calendar events go here.</div>

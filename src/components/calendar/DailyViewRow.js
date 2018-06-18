@@ -42,14 +42,13 @@ export class DailyViewRow extends React.Component {
     return (
       <section
         className={`calendar__item calendar__row--bg-color ${currentLifeGoal ? currentLifeGoal.goalColor : ''}`}
-        style={{gridRow: `${this.props.rowNum}: 24`}}
+        style={{gridRow: `${this.props.rowNum}`}}
         // ref={`note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`}
         // onClick={this.handleRefTest}
       >
         {/* Individual Calendar Row */}
         <div
           id={this.props.defaultStartTime}
-          className="calendar__row"
           onClick={this.onToggleModal}
         >
           <div>{this.props.defaultStartTime}</div>
