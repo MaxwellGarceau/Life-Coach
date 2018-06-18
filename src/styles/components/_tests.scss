@@ -1,0 +1,29 @@
+.calendar {
+  &__container {
+    display: grid;
+    grid-template-rows: repeat(24, auto);
+    grid-template-columns: auto;
+  }
+  &__item {
+    grid-column: 1 / 1;
+    // background-color: red;
+    // min-height: 75px;
+  }
+  &__item-event {
+    background-color: red;
+    z-index: 2;
+  }
+}
+.calendar-event-test {
+  background-color: red;
+  min-height: 75px;
+  position: absolute;
+  top: 786.25px;
+}
+
+// .calendar__ {
+//   background-color: red;
+//   min-height: 75px;
+// }
+
+

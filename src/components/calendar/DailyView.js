@@ -37,11 +37,17 @@ export class DailyView extends React.Component {
         }
         <h1 onClick={this.handleGoToDay}>{currentDateFormat}</h1>
         <h2>Current date: {currentDateFormat}</h2>
-        <div className="calendar">
-          {timeArr.map((defaultStartTime) => {
-            return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} />;
+        <div className="calendar calendar__container">
+          {timeArr.map((defaultStartTime, ind) => {
+            return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
           })}
+          <div className="calendar__item calendar__item-event" style={{gridRow: '2 / 3'}}>Created calendar events go here.</div>
+          
         </div>
+        {/*<div className="calendar-event-container">
+          <div className="calendar-event-test">Created calendar events go here.</div>
+          <div className="calendar-event-test">Second overlapping calendar event</div>
+        </div>*/}
       </section>
     );
   }

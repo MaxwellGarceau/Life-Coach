@@ -22,22 +22,16 @@ export class DailyViewRow extends React.Component {
       ? this.setState(() => ({ isModalVisible: true }))
       : this.setState(() => ({ isModalVisible: false }));
   };
+  // TEST
+  // handleRefTest = () => {
+  //   const bodyRect = document.body.getBoundingClientRect();
+  //   const rowRef = this.refs[`note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`];
+  //   const rowRect = rowRef.getBoundingClientRect();
+  //   const offSet = rowRect.top - bodyRect.top;
+  //   console.log('distance from top of body', offSet);
+  // };
+  // TEST END
   render(props) {
-
-// // TEST
-// const bodyRect = document.body.getBoundingClientRect();
-// console.log ('bodyRect', bodyRect);
-// // const firstRow = document.querySelector(`#note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`);
-// console.log(this.noteDisplayStart);
-// const firstRow = this.noteDisplayStart.current;
-// console.log('firstRow', firstRow);
-// // const firstRowRect = firstRow.getBoundingClientRect();
-// // console.log('firstRowRect', firstRowRect);
-//     // offset   = elemRect.top - bodyRect.top;
-
-// // alert('Element is ' + offset + ' vertical pixels from <body>');
-// // TEST END
-
     let modalBgVisiblityClasses = this.state.isModalVisible
       ? ' visible opacity-full'
       : '';
@@ -47,9 +41,10 @@ export class DailyViewRow extends React.Component {
     const isDescriptionRow = primeAssignedNote && primeAssignedNote.currentStartTime === this.props.defaultStartTime;
     return (
       <section
-        className={`calendar__row--bg-color ${currentLifeGoal ? currentLifeGoal.goalColor : ''}`}
-        id={`note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`}
-        // ref={this.noteDisplayStart}
+        className={`calendar__item calendar__row--bg-color ${currentLifeGoal ? currentLifeGoal.goalColor : ''}`}
+        style={{gridRow: `${this.props.rowNum}: 24`}}
+        // ref={`note-display-${this.props.currentDate}-start-${this.props.defaultStartTime}`}
+        // onClick={this.handleRefTest}
       >
         {/* Individual Calendar Row */}
         <div
@@ -86,8 +81,6 @@ export class DailyViewRow extends React.Component {
 // });
 
 const mapStateToProps = (state, ownProps) => ({
-  // Replace with actual item from redux store later
-  test: !!state.notes[0] ? state.notes[0].currentStartTime : '',
   notes: state.notes,
   // Using ownProps for date selection. Maybe switch to redux later
   assignedNote: determineAssignedNote(state.notes, ownProps.defaultStartTime, ownProps.currentDate),
