@@ -29,7 +29,7 @@ export const endTimeStartTimeDifference = (startTime, endTime) => {
 }
 
 // Convert time ('1am') to number (1)
-const convertTimeToNumber = (origTime) => {
+export const convertTimeToNumber = (origTime) => {
   // If argument is a number already just return the number
   if (!isNaN(origTime)) {
     return origTime;

@@ -9,6 +9,7 @@ import { startSetDate } from '../../actions/calendar';
 // Components
 import DailyViewRow from './DailyViewRow';
 import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
+import CalendarNotes from './CalendarNotes';
 
 // Component Logic
 import { timeArr, formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
@@ -41,10 +42,7 @@ export class DailyView extends React.Component {
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
           })}
-          <div className="calendar__container-event">
-            {/* Create a CalendarEvent component instead of using a div */}
-            <div className="calendar__item-event" style={{gridRow: '2 / 5', zIndex: '3', gridColumn: '1 / 2'}}>Created calendar events go here.</div>
-          </div>
+          <CalendarNotes />
         </div>
         {/*<div className="calendar-event-container">
           <div className="calendar-event-test">Created calendar events go here.</div>

@@ -1,4 +1,9 @@
-const lifeGoalsReducerDefaultState = [];
+const lifeGoalsReducerDefaultState = [{
+  id: 'errands',
+  goalColor: 'calendar__row--bg-color-dark-grey',
+  goalDescription: 'Default option for non life goals.',
+  goalTitle: 'Errands'
+}];
 
 export default (state = lifeGoalsReducerDefaultState, action) => {
   switch (action.type) {
