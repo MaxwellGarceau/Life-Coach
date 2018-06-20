@@ -7,19 +7,26 @@ import { convertTimeToNumber } from '../../selectors/determine-elapsed-time';
 
 // Redux
 import determineLifeGoal from '../../selectors/determine-life-goal';
+import determineAssignedNote from '../../selectors/determine-assigned-note';
+import determineCalendarNoteOrder from '../../selectors/determine-calendar-note-order';
 
 class CalendarNotes extends React.Component {
   render (props) {
+    const noteCount = this.props.calendarNotes.length;
+    determineCalendarNoteOrder(this.props.calendarNotes);
+    console.log(this.props.calendarNotes);
     return (
       <div className="calendar__container-event">
-        {/* Create a CalendarEvent component instead of using a div */}
-        {this.props.calendarNotes.map((note) => {
+        {/* gridRow/gridColumn has plus 1 because currentStartTimeNum and currentEndTimeNum are zero index'd and css grid starts at 1*/}
+        {this.props.calendarNotes.map((note, ind) => {
           const goalColor = determineLifeGoal(this.props.lifeGoals, note)[0].goalColor;
+          const currentStartTimeNum = convertTimeToNumber(note.currentStartTime);
+          const currentEndTimeNum = convertTimeToNumber(note.currentEndTime);
           const styleProperties = {
             // backgroundColor: goalColor, // Currently being assinged as a class. Maybe change later
-            gridRow: '2 / 5',
-            gridColumn: '2 / 5',
-            zIndex: `${3 + convertTimeToNumber(note.currentStartTime)}`
+            gridRow: `${1 + currentStartTimeNum} / ${1 + currentEndTimeNum}`,
+            gridColumn: `${ind} / ${1 + noteCount}`,
+            zIndex: `${3 + currentStartTimeNum}`
           };
           return <div key={note.id} className={`calendar__item-event ${goalColor}`} style={styleProperties}>{note.noteDescription}</div>;
         })}
@@ -33,8 +40,8 @@ class CalendarNotes extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  calendarNotes: state.notes,
+const mapStateToProps = (state, ownProps) => ({
+  calendarNotes: determineAssignedNote(state.notes, ownProps.currentDate),
   lifeGoals: state.lifeGoals
 });
 

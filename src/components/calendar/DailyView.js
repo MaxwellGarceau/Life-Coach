@@ -42,7 +42,7 @@ export class DailyView extends React.Component {
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
           })}
-          <CalendarNotes />
+          <CalendarNotes currentDate={this.props.currentDate} />
         </div>
         {/*<div className="calendar-event-container">
           <div className="calendar-event-test">Created calendar events go here.</div>
