@@ -9,15 +9,28 @@ import { startSetDate } from '../../actions/calendar';
 // Components
 import DailyViewRow from './DailyViewRow';
 import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
-import CalendarNotes from './CalendarNotes';
+import CalendarNotesContainer from './CalendarNotesContainer';
+import DailyViewModal from './DailyViewModal';
 
 // Component Logic
 import { timeArr, formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 
 export class DailyView extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
+
+    this.state = {
+      isModalVisible: false,
+      assignedNote: ''
+    };
+    // this.noteDisplayStart = React.createRef();
   }
+  onToggleModal = (note) => {
+    console.log('toggle modal', note);
+    this.state.isModalVisible == false
+      ? this.setState(() => ({ assignedNote: note, isModalVisible: true }))
+      : this.setState(() => ({ assignedNote: false, isModalVisible: false }));
+  };
   handleGoToDay = () => {
     if (this.props.weekViewAssignedDate) {
       const dateUpdate = formatSetDate(this.props.weekViewAssignedDate, 'YYYY-MM-DD', 0, '', 'MM-DD-YYYY');
@@ -27,6 +40,9 @@ export class DailyView extends React.Component {
     }
   }
   render (props) {
+    let modalBgVisiblityClasses = this.state.isModalVisible
+      ? ' visible opacity-full'
+      : '';
     const reduxCurrentDate = this.props.currentDate;
     const weekViewAssignedDate = this.props.weekViewAssignedDate ? formatSetDate(this.props.weekViewAssignedDate, 'YYYY-MM-DD', 0, '', 'MM-DD-YYYY') : false;
     const currentDate = weekViewAssignedDate || reduxCurrentDate;
@@ -42,12 +58,19 @@ export class DailyView extends React.Component {
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
           })}
-          <CalendarNotes currentDate={this.props.currentDate} />
+          <CalendarNotesContainer currentDate={this.props.currentDate} onToggleModal={this.onToggleModal} />
         </div>
-        {/*<div className="calendar-event-container">
-          <div className="calendar-event-test">Created calendar events go here.</div>
-          <div className="calendar-event-test">Second overlapping calendar event</div>
-        </div>*/}
+        <div
+          className={`daily-view-modal__background${modalBgVisiblityClasses}`}
+        >
+        {this.state.isModalVisible && (
+          <DailyViewModal
+            onToggleModal={this.onToggleModal}
+            assignedNote={this.state.assignedNote}
+            currentDate={this.props.currentDate}
+          />
+        )}
+        </div>
       </section>
     );
   }
