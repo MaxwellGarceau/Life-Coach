@@ -58,7 +58,7 @@ export class DailyView extends React.Component {
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
           })}
-          <CalendarNotesContainer currentDate={this.props.currentDate} onToggleModal={this.onToggleModal} />
+          <CalendarNotesContainer currentDate={currentDate} onToggleModal={this.onToggleModal} />
         </div>
         <div
           className={`daily-view-modal__background${modalBgVisiblityClasses}`}
@@ -67,7 +67,7 @@ export class DailyView extends React.Component {
           <DailyViewModal
             onToggleModal={this.onToggleModal}
             assignedNote={this.state.assignedNote}
-            currentDate={this.props.currentDate}
+            currentDate={currentDate}
           />
         )}
         </div>
