@@ -7,10 +7,4 @@ export const determineCalendarNoteOrder = (calendarNotesArr) => {
   });
 }
 
-export const determineGreatestElapsedTime = (elapsedTimeArr, lastGroupEndTime) => {
-  let greatestElapsedTimeNumArr = elapsedTimeArr.map((time) => convertTimeToNumber(time));
-  greatestElapsedTimeNumArr.push(lastGroupEndTime);
-  return greatestElapsedTimeNumArr.reduce((a, b) => Math.max(a, b));
-}
-
 export default determineCalendarNoteOrder;

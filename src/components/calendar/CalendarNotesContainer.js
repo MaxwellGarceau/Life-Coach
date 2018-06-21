@@ -8,7 +8,8 @@ import { convertTimeToNumber } from '../../selectors/determine-elapsed-time';
 // Redux
 import determineLifeGoal from '../../selectors/determine-life-goal';
 import determineAssignedNote from '../../selectors/determine-assigned-note';
-import { determineCalendarNoteOrder, determineGreatestElapsedTime } from '../../selectors/determine-calendar-note-order';
+import determineCalendarNoteOrder from '../../selectors/determine-calendar-note-order';
+import determineGreatestElapsedTime from '../../selectors/determine-greatest-elapsed-time';
 
 // Other Components
 import CalendarNote from './CalendarNote';
