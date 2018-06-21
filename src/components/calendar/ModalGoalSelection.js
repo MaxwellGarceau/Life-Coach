@@ -8,7 +8,7 @@ class ModalGoalSelection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      goalId: this.props.assignedLifeGoal ? this.props.assignedLifeGoal.id : 'errands'
+      goalId: this.props.assignedLifeGoal ? this.props.assignedLifeGoal.id : 'errands-123'
     }
   };
   handleGoalId = (e) => {
@@ -23,8 +23,7 @@ class ModalGoalSelection extends React.Component {
         <span>Select Goal</span>
         <div>
           <select value={this.state.goalId} onChange={this.handleGoalId}>
-            <option value="errands">Errands</option>
-            {this.props.lifeGoals.length > 0 && this.props.lifeGoals.map(goal => {
+            {this.props.lifeGoals.length > 0 && this.props.lifeGoals.map((goal) => {
               return <option key={goal.id} value={goal.id}>{goal.goalTitle}</option>;
             })}
           </select>

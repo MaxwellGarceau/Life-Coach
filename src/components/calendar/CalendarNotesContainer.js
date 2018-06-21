@@ -12,7 +12,6 @@ import { determineCalendarNoteOrder, determineGreatestElapsedTime } from '../../
 
 // Other Components
 import CalendarNote from './CalendarNote';
-// import DailyViewModal from './DailyViewModal';
 
 class CalendarNotesContainer extends React.Component {
   render (props) {
@@ -20,33 +19,42 @@ class CalendarNotesContainer extends React.Component {
     let lastGroupEndTime = 0;
     const noteCount = this.props.calendarNotes.length;
     determineCalendarNoteOrder(this.props.calendarNotes);
-    return (
-      <div className="calendar__container-event">
-        {/* gridRow/gridColumn has plus 1 because currentStartTimeNum and currentEndTimeNum are zero index'd and css grid starts at 1*/}
-        {this.props.calendarNotes.map((note, ind) => {
-          const goalColor = determineLifeGoal(this.props.lifeGoals, note)[0].goalColor;
-          const currentStartTimeNum = convertTimeToNumber(note.currentStartTime);
-          let currentEndTimeNum = convertTimeToNumber(note.currentEndTime);
-          if (currentEndTimeNum === 0) {
-            currentEndTimeNum = 24;
-          }
-          // Nested Grid Counter to make sure non nested events don't get shrunk
-          if (lastGroupEndTime > currentStartTimeNum) {
-            nestedGridCounter++;
-          } else {
-            nestedGridCounter = 1;
-          }
-          const styleProperties = {
-            gridRow: `${1 + currentStartTimeNum} / ${1 + currentEndTimeNum}`,
-            gridColumn: `${nestedGridCounter} / ${1 + noteCount}`,
-            zIndex: `${3 + ind}`
-          };
-          // Gives latest end time for nested grid check
-          lastGroupEndTime = determineGreatestElapsedTime(note.elapsedTime, lastGroupEndTime);
-          return <CalendarNote key={note.id} onToggleModal={this.props.onToggleModal} assignedNote={note} currentDate={this.props.currentDate} classNameObj={`calendar__item-event ${goalColor}`} styleObj={styleProperties} />
-        })}
-      </div>
-    );
+    // gridRow/gridColumn has plus 1 because currentStartTimeNum and currentEndTimeNum are zero index'd and css grid starts at 1
+    return this.props.calendarNotes.map((note, ind) => {
+      const goalColor = determineLifeGoal(this.props.lifeGoals, note)[0]
+        .goalColor;
+      const currentStartTimeNum = convertTimeToNumber(note.currentStartTime);
+      let currentEndTimeNum = convertTimeToNumber(note.currentEndTime);
+      if (currentEndTimeNum === 0) {
+        currentEndTimeNum = 24;
+      }
+      // Nested Grid Counter to make sure non nested events don't get shrunk
+      if (lastGroupEndTime > currentStartTimeNum) {
+        nestedGridCounter++;
+      } else {
+        nestedGridCounter = 1;
+      }
+      const styleProperties = {
+        gridRow: `${1 + currentStartTimeNum} / ${1 + currentEndTimeNum}`,
+        gridColumn: `${nestedGridCounter} / ${1 + noteCount}`,
+        zIndex: `${3 + ind}`
+      };
+      // Gives latest end time for nested grid check
+      lastGroupEndTime = determineGreatestElapsedTime(
+        note.elapsedTime,
+        lastGroupEndTime
+      );
+      return (
+        <CalendarNote
+          key={note.id}
+          onToggleModal={this.props.onToggleModal}
+          assignedNote={note}
+          currentDate={this.props.currentDate}
+          classNameObj={`calendar__item-event ${goalColor}`}
+          styleObj={styleProperties}
+        />
+      );
+    })
   }
 }
 

@@ -1,6 +1,6 @@
-const lifeGoalsReducerDefaultState = [{
-  id: 'errands',
-  goalColor: 'calendar__row--bg-color-dark-grey',
+export const lifeGoalsReducerDefaultState = [{
+  id: 'errands-123',
+  goalColor: 'calendar__row--bg-color-grey',
   goalDescription: 'Default option for non life goals.',
   goalTitle: 'Errands'
 }];
@@ -25,7 +25,7 @@ export default (state = lifeGoalsReducerDefaultState, action) => {
         return id !== action.id;
       });
     case 'GET_LIFEGOALS':
-      return action.goals;
+      return [...state, ...action.goals];
     default:
       return state;
   }

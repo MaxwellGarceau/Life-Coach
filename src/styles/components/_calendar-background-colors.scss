@@ -27,6 +27,6 @@
     @include calendar-background($calendar-purple, white);
   }
   &-grey {
-    @include calendar-background($calendar-purple, white);
+    @include calendar-background($calendar-grey, white);
   }
 }

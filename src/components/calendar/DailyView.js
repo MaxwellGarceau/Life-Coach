@@ -23,10 +23,8 @@ export class DailyView extends React.Component {
       isModalVisible: false,
       assignedNote: ''
     };
-    // this.noteDisplayStart = React.createRef();
   }
   onToggleModal = (note) => {
-    console.log('toggle modal', note);
     this.state.isModalVisible == false
       ? this.setState(() => ({ assignedNote: note, isModalVisible: true }))
       : this.setState(() => ({ assignedNote: false, isModalVisible: false }));
@@ -34,7 +32,6 @@ export class DailyView extends React.Component {
   handleGoToDay = () => {
     if (this.props.weekViewAssignedDate) {
       const dateUpdate = formatSetDate(this.props.weekViewAssignedDate, 'YYYY-MM-DD', 0, '', 'MM-DD-YYYY');
-      console.log('dateupdate', dateUpdate);
       this.props.startSetDate(dateUpdate);
       history.push(`/calendar/day/${this.props.weekViewAssignedDate}`);
     }

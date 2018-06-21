@@ -13,7 +13,7 @@ export class DailyViewModal extends React.Component {
       currentStartTime: props.assignedNote ? props.assignedNote.currentStartTime : this.props.defaultStartTime,
       currentEndTime: props.assignedNote ? props.assignedNote.currentEndTime : defaultEndTime(this.props.defaultStartTime),
       assignedNoteId: props.assignedNote ? props.assignedNote.id : undefined,
-      goalId: props.assignedNote ? props.assignedNote.goalId : undefined
+      goalId: props.assignedNote ? props.assignedNote.goalId : 'errands-123'
     };
   }
   onNoteDescriptionChange = (e) => {

@@ -7,6 +7,9 @@
         background-color: $light-grey;
       }
     }
+    &__row-content {
+      height: 100%;
+    }
 }
 
 // .calendar-event-container {
