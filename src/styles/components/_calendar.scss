@@ -10,6 +10,19 @@
     &__row-content {
       height: 100%;
     }
+    &__all-day-event {
+      border-radius: 2px;
+      padding: 3px;
+      height: $calendar-all-day-event-height;
+      flex: 0 0 100%;
+      // max-width: $calendar-column-width;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      &-empty-space {
+        min-height: $calendar-all-day-event-height;
+      }
+    }
 }
 
 // .calendar-event-container {

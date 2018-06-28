@@ -25,8 +25,8 @@ export class DailyViewModal extends React.Component {
       currentEndTime: props.assignedNote ? props.assignedNote.currentEndTime : defaultEndTime(this.props.defaultStartTime),
       assignedNoteId: props.assignedNote ? props.assignedNote.id : undefined,
       goalId: props.assignedNote ? props.assignedNote.goalId : 'errands-123',
-      startDate: moment(this.props.currentDate),
-      endDate: moment(this.props.currentDate)
+      startDate: props.assignedNote ? moment(props.assignedNote.startDate) : moment(this.props.currentDate),
+      endDate: props.assignedNote ? moment(props.assignedNote.endDate) : moment(this.props.currentDate)
     };
   }
   onNoteDescriptionChange = (e) => {
@@ -94,6 +94,8 @@ export class DailyViewModal extends React.Component {
           <ModalDateSelection
             currentDate={this.props.currentDate}
             handleDateSelection={this.handleDateSelection}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
            />
           <ModalGoalSelection 
             handleGoalId={this.handleGoalId}

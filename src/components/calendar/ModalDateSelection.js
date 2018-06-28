@@ -9,8 +9,8 @@ class ModalDateSelection extends React.Component {
     super(props);
     this.state = {
       calendarFocused: null,
-      startDate: moment(this.props.currentDate),
-      endDate: moment(this.props.currentDate)
+      startDate: this.props.startDate,
+      endDate: this.props.endDate
     };
   };
   onDatesChange = ({ startDate, endDate }) => {
