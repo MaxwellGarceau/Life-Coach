@@ -1,6 +1,9 @@
 // 3rd Party
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
+// Redux
 import { startAddNote, startRemoveNote, startEditNote } from '../../actions/notes';
 
 // Other Components
@@ -10,6 +13,7 @@ import ModalDateSelection from './ModalDateSelection';
 
 // Componenet Logic
 import determineElapsedTime, { defaultEndTime } from '../../selectors/determine-elapsed-time';
+import { determineElapsedDates } from '../../selectors/determine-elapsed-dates';
 import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 
 export class DailyViewModal extends React.Component {
@@ -21,8 +25,8 @@ export class DailyViewModal extends React.Component {
       currentEndTime: props.assignedNote ? props.assignedNote.currentEndTime : defaultEndTime(this.props.defaultStartTime),
       assignedNoteId: props.assignedNote ? props.assignedNote.id : undefined,
       goalId: props.assignedNote ? props.assignedNote.goalId : 'errands-123',
-      noteAssignedStartDate: this.props.currentDate,
-      noteAssignedEndDate: this.props.currentDate
+      startDate: moment(this.props.currentDate),
+      endDate: moment(this.props.currentDate)
     };
   }
   onNoteDescriptionChange = (e) => {
@@ -31,6 +35,8 @@ export class DailyViewModal extends React.Component {
   };
   onSubmit = (e) => {
       e.preventDefault();
+      // const elapsedDates = determineElapsedDates(this.state.noteAssignedStartDate, this.state.noteAssignedEndDate);
+      // console.log(elapsedDates);
     // Maybe also send an object with an array of times in between to redux
     const note = {
       id: this.state.assignedNoteId,
@@ -40,8 +46,9 @@ export class DailyViewModal extends React.Component {
       elapsedTime: determineElapsedTime(this.state.currentStartTime, this.state.currentEndTime),
       goalId: this.state.goalId,
       currentDate: this.props.currentDate,
-      noteAssignedStartDate: this.state.noteAssignedStartDate,
-      noteAssignedEndDate: this.state.noteAssignedEndDate
+      startDate: formatSetDate(this.state.startDate),
+      endDate: formatSetDate(this.state.endDate),
+      elapsedDates: determineElapsedDates(this.state.startDate, this.state.endDate)
     };
     note.id ? this.props.startEditNote(note) : this.props.startAddNote(note);
     this.onToggleModal();
@@ -63,12 +70,9 @@ export class DailyViewModal extends React.Component {
     this.setState({ goalId });
   };
   handleDateSelection = (startDate, endDate) => {
-    startDate = formatSetDate(startDate);
-    endDate = endDate === null ? endDate : formatSetDate(endDate);
-    this.setState({ noteAssignedStartDate: startDate, noteAssignedEndDate: endDate }, () => {
-      console.log('startDate', this.state.noteAssignedStartDate);
-      console.log('endDate', this.state.noteAssignedEndDate);
-    });
+    // startDate = formatSetDate(startDate);
+    // endDate = endDate === null ? endDate : formatSetDate(endDate);
+    this.setState({ startDate, endDate });
   }
   render () {
     return (

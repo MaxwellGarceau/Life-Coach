@@ -15,9 +15,12 @@ export const startAddNote = (noteData = {}) => {
       currentEndTime = '',
       elapsedTime = [],
       goalId = '',
-      currentDate = ''
+      currentDate = '',
+      startDate = '',
+      endDate = '',
+      elapsedDates = []
     } = noteData;
-    const note = { noteDescription, currentStartTime, currentEndTime, elapsedTime, goalId, currentDate };
+    const note = { noteDescription, currentStartTime, currentEndTime, elapsedTime, goalId, currentDate, startDate, endDate, elapsedDates };
 
     return database
       .ref(`users/${uid}/notes`)
@@ -65,9 +68,12 @@ export const startEditNote = (editedNoteData = {}) => {
       currentEndTime,
       elapsedTime,
       goalId,
-      currentDate
+      currentDate,
+      startDate,
+      endDate,
+      elapsedDates
     } = editedNoteData;
-    const editedNote = { noteDescription, currentStartTime, currentEndTime, elapsedTime, goalId, currentDate };
+    const editedNote = { noteDescription, currentStartTime, currentEndTime, elapsedTime, goalId, currentDate, startDate, endDate, elapsedDates };
     console.log(goalId);
     return database
       .ref(`users/${uid}/notes/${id}`)
