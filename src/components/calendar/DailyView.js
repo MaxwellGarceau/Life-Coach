@@ -43,14 +43,16 @@ export class DailyView extends React.Component {
     const reduxCurrentDate = this.props.currentDate;
     const weekViewAssignedDate = this.props.weekViewAssignedDate ? formatSetDate(this.props.weekViewAssignedDate, 'YYYY-MM-DD', 0, '', 'MM-DD-YYYY') : false;
     const currentDate = weekViewAssignedDate || reduxCurrentDate;
-    const currentDateFormat = formatSetDate(currentDate, 'MM-DD-YYYY');
+    const currentDateFormat = formatSetDate(currentDate, 'M-D-YY');
+    // const currentDayOfMonth = formatSetDate(currentDate, 'DD');
+    const currentDayOfWeek = formatSetDate(currentDate, 'ddd')
     return (
-      <section>
+      <section className={this.props.weekViewClasses}>
         {!weekViewAssignedDate &&
           <CalendarViewSelectorArrows dateFormat={'days'}/>
         }
-        <h1 onClick={this.handleGoToDay}>{currentDateFormat}</h1>
-        <h2>Current date: {currentDateFormat}</h2>
+        <h1 className="daily-calendar-view__day-of-week" onClick={this.handleGoToDay}>{currentDayOfWeek}</h1>
+        <h2 className="daily-calendar-view__day-of-month">{currentDateFormat}</h2>
         <div className="calendar calendar__container">
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;

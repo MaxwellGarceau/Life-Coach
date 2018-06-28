@@ -6,7 +6,8 @@ import moment from 'moment';
 const calendarReducerDefaultState = {
   // currentYear: moment().year(),
   // currentMonth: moment().month(),
-  currentDate: moment().format('YYYY-MM-DD')
+  currentDate: moment().format('YYYY-MM-DD'),
+  todaysDate: moment()
   // currentWeek: startWeekFunc(moment().year(), moment().month())
 };
 

@@ -38,7 +38,7 @@ export class DailyViewRow extends React.Component {
       >
         {/* Individual Calendar Row */}
         <div className="calendar__row-content" onClick={this.onToggleModal}>
-          <div>{this.props.defaultStartTime}</div>
+          <div className="daily-calendar-view__start-time">{this.props.defaultStartTime}</div>
         </div>
         {/* Modal pop up for inputting activity */}
         <div

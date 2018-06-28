@@ -2,6 +2,7 @@
 @import './base/settings';
 @import './base/mixins';
 @import './base/base';
+@import './base/fonts';
 
 // Modules
 @import './components/box-layout';
@@ -15,7 +16,10 @@
 @import './components/list';
 @import './components/loader';
 @import './components/calendar';
+@import './components/calendar-item-events';
 @import './components/modal';
+@import './components/week-calendar-view';
+@import './components/daily-calendar-view';
 
 // Modifiers
 @import './components/calendar-background-colors';

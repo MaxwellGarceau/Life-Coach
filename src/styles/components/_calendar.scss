@@ -23,3 +23,12 @@
     background-color: purple;
   }
 }
+
+.calendar-date-selector {
+  font-size: 2rem;
+  &__button {
+    &:first-child {
+      margin-right: 5px;
+    }
+  }
+}

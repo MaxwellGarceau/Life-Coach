@@ -22,9 +22,9 @@ class CalendarViewSelectorArrows extends React.Component {
   };
   render (props) {
     return (
-      <div>
-        <span onClick={this.handleDateDecrease}><i className="fa fa-arrow-circle-left" /></span>
-        <span onClick={this.handleDateIncrease}><i className="fa fa-arrow-circle-right" /></span>
+      <div className={`${this.props.displayFormat} calendar-date-selector`}>
+        <span onClick={this.handleDateDecrease}><i className="fa fa-arrow-circle-left calendar-date-selector__button" /></span>
+        <span onClick={this.handleDateIncrease}><i className="fa fa-arrow-circle-right calendar-date-selector__button" /></span>
       </div>
     );
   }
