@@ -11,6 +11,7 @@ import DailyViewRow from './DailyViewRow';
 import CalendarViewSelectorArrows from './CalendarViewSelectorArrows';
 import CalendarNotesContainer from './CalendarNotesContainer';
 import DailyViewModal from './DailyViewModal';
+import AllDayEvent from './AllDayEvent';
 
 // Component Logic
 import { timeArr, formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
@@ -53,6 +54,7 @@ export class DailyView extends React.Component {
         }
         <h1 className="daily-calendar-view__day-of-week" onClick={this.handleGoToDay}>{currentDayOfWeek}</h1>
         <h2 className="daily-calendar-view__day-of-month">{currentDateFormat}</h2>
+        <AllDayEvent currentDate={currentDate}/>
         <div className="calendar calendar__container">
           {timeArr.map((defaultStartTime, ind) => {
             return <DailyViewRow key={defaultStartTime} currentDate={currentDate} defaultStartTime={defaultStartTime} rowNum={ind + 1} />;
