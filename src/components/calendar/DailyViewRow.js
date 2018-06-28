@@ -48,7 +48,7 @@ export class DailyViewRow extends React.Component {
             <DailyViewModal
               onToggleModal={this.onToggleModal}
               defaultStartTime={this.props.defaultStartTime}
-              assignedNote={primeAssignedNote}
+              // assignedNote={primeAssignedNote}
               currentDate={this.props.currentDate}
             />
           )}

@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 // Component Logic
-import { formatSetDate } from '../../component-logic/calendar/generate-calendar-dates';
 import { convertTimeToNumber } from '../../selectors/determine-elapsed-time';
-
-// Other Components
-// import DailyViewModal from './DailyViewModal';
 
 class CalendarNote extends React.Component {
   render (props) {
