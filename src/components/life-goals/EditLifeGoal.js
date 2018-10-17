@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startEditLifeGoal, startRemoveLifeGoal } from '../actions/life-goals';
-import { startRemoveNote } from '../actions/notes';
-import determineDeleteGoalNotes from '../selectors/determine-delete-goal-notes';
+import { startEditLifeGoal, startRemoveLifeGoal } from '../../actions/life-goals';
+import { startRemoveNote } from '../../actions/notes';
+import determineDeleteGoalNotes from '../../selectors/determine-delete-goal-notes';
 import LifeGoalForm from './LifeGoalForm';
 
 class EditLifeGoal extends React.Component {

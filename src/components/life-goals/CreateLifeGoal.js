@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddLifeGoal } from '../actions/life-goals';
+import { startAddLifeGoal } from '../../actions/life-goals';
 import LifeGoalForm from './LifeGoalForm';
 
 class CreateLifeGoal extends React.Component {

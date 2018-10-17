@@ -13,12 +13,13 @@ export const Header = ({ startLogout }) => (
         <Link to="/goals">
           <button className="button button--link">Life Goals</button>
         </Link>
+        {/* LINKS TO OLD (CUSTOM MADE) CALENDAR
         <Link to="/daily-calendar">
-          <button className="button button--link">Daily Calendar</button>
-        </Link>
-        <Link to="/calendar">
-          <button className="button button--link">Calendar</button>
-        </Link>
+            <button className="button button--link">Daily Calendar</button>
+          </Link>
+          <Link to="/calendar">
+            <button className="button button--link">Calendar</button>
+          </Link> */}
         <button className="button button--link" onClick={startLogout}>Logout</button>
       </div>
     </div>
