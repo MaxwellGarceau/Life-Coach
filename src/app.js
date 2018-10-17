@@ -5,7 +5,6 @@ import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { login, logout } from './actions/auth';
 import { startGetGoals } from './actions/life-goals';
-import { startGetNotes } from './actions/notes';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
@@ -34,12 +33,10 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch(login(user.uid));
     store.dispatch(startGetGoals()).then(() => {
-      store.dispatch(startGetNotes()).then(() => {
-        renderApp();
-        if (history.location.pathname === '/') {
-          history.push('/dashboard');
-        }
-      });
+      renderApp();
+      if (history.location.pathname === '/') {
+        history.push('/dashboard');
+      }
     });
   } else {
     store.dispatch(logout());

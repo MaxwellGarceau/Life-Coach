@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startEditLifeGoal, startRemoveLifeGoal } from '../../actions/life-goals';
-import { startRemoveNote } from '../../actions/notes';
-import determineDeleteGoalNotes from '../../selectors/determine-delete-goal-notes';
 import LifeGoalForm from './LifeGoalForm';
 
 class EditLifeGoal extends React.Component {
@@ -15,8 +13,6 @@ class EditLifeGoal extends React.Component {
     if (!confirmRemoveGoal) {
       return;
     }
-    const deleteNoteArr = determineDeleteGoalNotes(this.props.notes, this.props.goal.id);
-    deleteNoteArr.map((note) => this.props.startRemoveNote(note.id));
     this.props.startRemoveLifeGoal({ id: this.props.goal.id });
     this.props.history.push("/goals");
   }
@@ -39,12 +35,10 @@ class EditLifeGoal extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   startEditLifeGoal: (id, lifeGoal) => dispatch(startEditLifeGoal(id, lifeGoal)),
   startRemoveLifeGoal: (id) => dispatch(startRemoveLifeGoal(id)),
-  startRemoveNote: (note) => dispatch(startRemoveNote(note))
 })
 
 const mapStateToProps = (state, props) => ({
-  goal: state.lifeGoals.find((goal) => goal.id === props.match.params.id),
-  notes: state.notes
+  goal: state.lifeGoals.find((goal) => goal.id === props.match.params.id)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditLifeGoal);
