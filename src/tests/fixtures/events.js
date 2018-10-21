@@ -1,6 +1,7 @@
 export default [{
   title: 'All Day Event',
-  start: '2018-10-01'
+  start: '2018-10-01',
+  myCustomId: 123456
 }, {
   title: 'Long Event',
   start: '2017-10-07',
@@ -20,7 +21,8 @@ export default [{
 }, {
   title: 'Meeting',
   start: '2018-10-12T10:30:00',
-  end: '2018-10-12T12:30:00'
+  end: '2018-10-12T12:30:00',
+  content: 'This is the content for the meeting'
 }, {
   title: 'Birthday Party',
   start: '2018-10-13T07:00:00'

@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 
 import FullCalendar from 'fullcalendar-reactwrapper';
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
@@ -14,6 +13,10 @@ class Calendar extends React.Component {
       eventsFixture
     }
   }
+  handleEventClick = (calEvent, jsEvent, view) => {
+    console.log('calEvent', calEvent);
+    console.log('content:', calEvent.content);
+  };
 
   render () {
     return (
@@ -25,6 +28,9 @@ class Calendar extends React.Component {
             center: 'title',
             right: 'month, agendaWeek, agendaDay'
           }}
+          eventClick={this.handleEventClick}
+          eventStartEditable={true}
+          eventDurationEditable={true}
           navLinks={true} // can click day/week names to navigate views
           editable={true}
           eventLimit={true} // allow "more" link when too many events
