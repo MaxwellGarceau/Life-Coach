@@ -4,20 +4,19 @@ import FullCalendar from 'fullcalendar-reactwrapper';
 import 'fullcalendar-reactwrapper/dist/css/fullcalendar.min.css';
 
 // Test Fixtures
-import eventsFixture from '../../tests/fixtures/events';
+import calendarEventsFixture from '../../tests/fixtures/calendar-events';
 
 class Calendar extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      eventsFixture
+      calendarEventsFixture
     }
   }
   handleEventClick = (calEvent, jsEvent, view) => {
     console.log('calEvent', calEvent);
     console.log('content:', calEvent.content);
   };
-
   render () {
     return (
       <div id="full-calendar-wrapper">
@@ -34,7 +33,7 @@ class Calendar extends React.Component {
           navLinks={true} // can click day/week names to navigate views
           editable={true}
           eventLimit={true} // allow "more" link when too many events
-          events={this.state.eventsFixture} />
+          events={this.state.calendarEventsFixture} />
       </div>
     );
   }
