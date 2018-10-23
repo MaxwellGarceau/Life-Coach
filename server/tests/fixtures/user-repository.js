@@ -14,8 +14,15 @@ module.exports = class UserRepository {
   findAll () {
     return users;
   }
-  getOneById (id) {
-    console.log(id);
+  findOneById (id) {
     return users.find((user) => user.id === id)
+  }
+  create (args) {
+    // const { login, firstName, lastName } = args;
+    // return {
+
+    // }
+    console.log(args);
+    return args;
   }
 }
