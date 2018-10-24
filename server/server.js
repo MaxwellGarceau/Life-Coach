@@ -4,24 +4,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
-const {
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLInt,
-  GraphQLString,
-  GraphQLList,
-  GraphQLSchema
-} = require('graphql');
-const UserRepository = require('./tests/fixtures/user-repository');
-const userRepository = new UserRepository();
 const schema = require('./schema/schema');
 
 const { mongoose } = require('./db/mongoose');
 const { ObjectID } = require('mongodb');
 const { authenticate } = require('./middleware/user-authentication');
-
-const { User } = require('./models/user');
 
 const publicPath = path.join(__dirname, '..', 'public');
 

@@ -18,11 +18,12 @@ module.exports = class UserRepository {
     return users.find((user) => user.id === id)
   }
   create (args) {
-    // const { login, firstName, lastName } = args;
-    // return {
-
-    // }
-    console.log(args);
-    return args;
+    const { login, firstName, lastName } = args;
+    console.log('login', login);
+    return {
+      login,
+      firstName,
+      lastName
+    }
   }
 }

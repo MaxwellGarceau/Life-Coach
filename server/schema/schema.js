@@ -10,19 +10,19 @@ const {
 const UserRepository = require('../tests/fixtures/user-repository');
 const userRepository = new UserRepository();
 
+// Models
+const { User } = require('../models/user');
+
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: {
     id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    },
-    login: {
       type: new GraphQLNonNull(GraphQLString)
     },
-    firstName: {
+    email: {
       type: new GraphQLNonNull(GraphQLString)
     },
-    lastName: {
+    password: {
       type: new GraphQLNonNull(GraphQLString)
     }
   }
@@ -41,7 +41,7 @@ const QueryType = new GraphQLObjectType({
       type: UserType,
       args: {
         id: {
-          type: new GraphQLNonNull(GraphQLInt)
+          type: new GraphQLNonNull(GraphQLString)
         }
       },
       resolve: (user, args) => {
@@ -57,18 +57,21 @@ const MutationType = new GraphQLObjectType({
     createUser: {
       type: UserType,
       args: {
-        login: {
+        email: {
           type: new GraphQLNonNull(GraphQLString)
         },
-        firstName: {
-          type: new GraphQLNonNull(GraphQLString)
-        },
-        lastName: {
+        password: {
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (args) => {
-        return userRepository.create(args);
+      resolve: async (parent, args) => {
+        try {
+          const user = new User(args);
+          await user.save();
+          return user;
+        } catch (e) {
+          console.log('Error: ', e);
+        }
       }
     }
   }
