@@ -1,8 +1,8 @@
+require('./config/config');
 const path = require('path');
 const express = require('express');
 const app = express();
-const publicPath = path.join(__dirname, '..', 'public');
-const port = process.env.PORT || 8081;
+const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
 const {
@@ -15,103 +15,32 @@ const {
 } = require('graphql');
 const UserRepository = require('./tests/fixtures/user-repository');
 const userRepository = new UserRepository();
+const schema = require('./schema/schema');
 
-// const schema = buildSchema(`
-//   "A user."
-//   type User {
-//     id: Int!
-//     login: String!
-//     firstName: String!
-//     lastName: String!
-//   }
+const { mongoose } = require('./db/mongoose');
+const { ObjectID } = require('mongodb');
+const { authenticate } = require('./middleware/user-authentication');
 
-//   "The root of it all"
-//   type Query {
-//     "Returns a list of users."
-//     users: [User]
+const { User } = require('./models/user');
 
-//     "Returns a single user matching an ID."
-//     user(id: Int!): User
-//   }
-// `);
+const publicPath = path.join(__dirname, '..', 'public');
 
-// const root = {
-//   users: () => {
-//     return userRepository.findAll();
-//   },
-//   user: ({ id }) => {
-//     return userRepository.findOneById(id);
-//   }
-// }
+let port;
+// Listens on a port exactly one number higher than specified in .env.development/.env.development
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  port = parseInt(process.env.PORT, 10) + 1 || 8081;
 
-const UserType = new GraphQLObjectType({
-  name: 'User',
-  fields: {
-    id: {
-      type: new GraphQLNonNull(GraphQLInt)
-    },
-    login: {
-      type: new GraphQLNonNull(GraphQLString)
-    },
-    firstName: {
-      type: new GraphQLNonNull(GraphQLString)
-    },
-    lastName: {
-      type: new GraphQLNonNull(GraphQLString)
-    }
-  }
-});
+  // Replace with events data
 
-const MutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: {
-    createUser: {
-      type: UserType,
-      args: {
-        login: {
-          type: new GraphQLNonNull(GraphQLString)
-        },
-        firstName: {
-          type: new GraphQLNonNull(GraphQLString)
-        },
-        lastName: {
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (args) => {
-        return userRepository.create(args);
-      }
-    }
-  }
-});
+  // const friendTestData = require('./tests/fixtures/friends-data').friends;
+  // friendTestData.map((testFriend) => {
+  //   return mongoose.connection.collection('friends').replaceOne({ _id: testFriend._id }, testFriend, { upsert: true });
+  // });
+} else {
+  port = process.env.PORT;
+}
 
-const QueryType = new GraphQLObjectType({
-  name: 'Query',
-  fields: {
-    users: {
-      type: new GraphQLList(UserType),
-      resolve: () => {
-        return userRepository.findAll();
-      }
-    },
-    user: {
-      type: UserType,
-      args: {
-        id: {
-          type: new GraphQLNonNull(GraphQLInt)
-        }
-      },
-      resolve: (user, args) => {
-        return userRepository.findOneById(args.id);
-      }
-    }
-  }
-});
-
-const schema = new GraphQLSchema({
-  query: QueryType,
-  mutation: MutationType
-});
+app.use(bodyParser.json());
 
 app.use('/graphql', graphqlHTTP({
   schema,
