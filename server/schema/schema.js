@@ -6,7 +6,7 @@ const {
   GraphQLString,
   GraphQLList,
   GraphQLSchema,
-  GraphQLID,
+  GraphQLID
 } = graphql;
 const UserRepository = require('../tests/fixtures/user-repository');
 const userRepository = new UserRepository();
@@ -35,7 +35,7 @@ const QueryType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve: () => {
-        return userRepository.findAll();
+        return User.find();
       }
     },
     user: {
@@ -46,7 +46,7 @@ const QueryType = new GraphQLObjectType({
         }
       },
       resolve: (user, args) => {
-        return userRepository.findOneById(args.id);
+        return User.findOne({_id: args.id});
       }
     }
   }

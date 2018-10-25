@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
+const cors = require('cors');
 
 const { mongoose } = require('./db/mongoose');
 const { ObjectID } = require('mongodb');
@@ -26,6 +27,8 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
 } else {
   port = process.env.PORT;
 }
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
