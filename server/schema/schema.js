@@ -5,7 +5,8 @@ const {
   GraphQLInt,
   GraphQLString,
   GraphQLList,
-  GraphQLSchema
+  GraphQLSchema,
+  GraphQLID,
 } = graphql;
 const UserRepository = require('../tests/fixtures/user-repository');
 const userRepository = new UserRepository();

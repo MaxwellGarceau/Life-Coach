@@ -11,13 +11,25 @@ import 'react-dates/lib/css/_datepicker.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { firebase } from './firebase/firebase';
 import LoadingPage from './components/LoadingPage';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import os from 'os';
+
+// Determines hostname programmatically. DOUBLE CHECK WHEN DEPLOYNG TO PRODUCTION.
+const graphQlUri = os.hostname() !== 'localhost' ? `${os.hostName()}graphql` : 'http://localhost:8081/graphql';
+
+const client = new ApolloClient({
+  uri: graphQlUri
+});
 
 const store = configureStore();
 
 const jsx = (
-  <Provider store={store}>
-    <AppRouter />
-  </Provider>
+  <ApolloProvider client={client} >
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
+  </ApolloProvider>
 );
 
 let hasRendered = false;
