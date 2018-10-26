@@ -8,8 +8,6 @@ const {
   GraphQLSchema,
   GraphQLID
 } = graphql;
-const UserRepository = require('../tests/fixtures/user-repository');
-const userRepository = new UserRepository();
 
 // Models
 const { User } = require('../models/user');
@@ -55,7 +53,7 @@ const QueryType = new GraphQLObjectType({
 const MutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    createUser: {
+    userSignUp: {
       type: UserType,
       args: {
         email: {
